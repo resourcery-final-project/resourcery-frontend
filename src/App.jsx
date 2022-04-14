@@ -12,6 +12,9 @@ export default function App() {
         <Route path="/signup">
           <Auth isSigningUp />
         </Route>
+        <Route exact path="/">
+          {'this is the home  page'}
+        </Route>
       </Switch>
     </BrowserRouter>
   );

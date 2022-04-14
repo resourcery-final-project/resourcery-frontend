@@ -31,6 +31,10 @@ export async function signUp(username, password) {
     mode: 'cors',
     body: JSON.stringify({ username, password }),
   });
+
+  if (!res.ok) throw new Error('Invalid username/password');
+
+  return res.json();
 }
 
 export async function signOut() {
