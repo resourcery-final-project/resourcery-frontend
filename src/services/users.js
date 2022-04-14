@@ -9,8 +9,8 @@ export async function getUser() {
   }
 }
 
-export async function signIn({ username, password }) {
-  const res = await fetch(`${process.env.API_URL}/api/v1/users`, {
+export async function signIn(username, password) {
+  const res = await fetch(`${process.env.API_URL}/api/v1/users/session`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -21,6 +21,16 @@ export async function signIn({ username, password }) {
   if (!res.ok) throw new Error('Invalid username/password');
 
   return res.json();
+}
+
+export async function signUp(username, password) {
+  const res = await fetch(`${process.env.API_URL}/api/v1/users`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    mode: 'cors',
+    body: JSON.stringify({ username, password }),
+  });
 }
 
 export async function signOut() {
