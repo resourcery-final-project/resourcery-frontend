@@ -30,4 +30,11 @@ header {
     background-color: #FFE8D6;
     left: 0;
     width: 100vw;
+
+    top: 0px;
+    height: 10vh;
+    opacity: .85;
+    
 }
+
+
