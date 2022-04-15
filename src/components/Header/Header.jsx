@@ -1,6 +1,8 @@
-import '../../App.module.css'
+import './Header.css'
 export default function Header() {
   return (
-    <header>Header</header>
+    <header>
+      <h1>resourcery</h1>
+    </header>
   )
 }

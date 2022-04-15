@@ -62,7 +62,7 @@ loader.load().then(() => {
 export default function Map() {
   const { map } = styles
   return (
-    <div className={map-container}>
+    <div>
       <div className={map} id="map">Map</div>
     </div>
   )
