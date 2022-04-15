@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;600&display=swap');
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #B7B7A4;
+    font-family: 'Josefin Slab', serif;
+    
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    align-items: center;
+    margin: 5vw;
+    gap: 2vw;
+}
+
+h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Josefin Slab', serif;
+
+}

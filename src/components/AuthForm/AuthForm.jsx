@@ -1,6 +1,8 @@
 import { useForm } from '../../hooks/useForm';
+import styles from '../../App.module.css'
 
 export default function AuthForm({ handleAuth, isSigningUp }) {
+  const { form } = styles;
   const { formState, handleFormChange } = useForm({
     username: '',
     password: '',
@@ -18,7 +20,7 @@ export default function AuthForm({ handleAuth, isSigningUp }) {
   }
 
   return (
-    <form>
+    <form className={form}>
       <input
         name="username"
         placeholder="username"
