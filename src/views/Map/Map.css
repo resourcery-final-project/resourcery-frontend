@@ -1,0 +1,8 @@
+.map-container {
+    position: relative;
+    
+}
+
+.map {
+  position: inherit !important;
+}

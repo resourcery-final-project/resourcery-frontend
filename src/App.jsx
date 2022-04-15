@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
+import Header from './components/Header/Header';
 import Auth from './views/Auth/Auth';
-
+import Map from './views/Map/Map';
 export default function App() {
   return (
     <BrowserRouter>
@@ -13,9 +13,10 @@ export default function App() {
           <Auth isSigningUp />
         </Route>
         <Route exact path="/">
-          {'this is the home  page'}
+          <Map />
         </Route>
-      </Switch>
+      </Switch> 
+      <Header />
     </BrowserRouter>
   );
 }
