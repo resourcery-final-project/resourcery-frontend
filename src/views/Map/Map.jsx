@@ -1,5 +1,6 @@
 import { Loader } from '@googlemaps/js-api-loader';
 import styles from './Map.css'
+import mapStyles from './mapStyles'
 
 
 const loader = new Loader({
@@ -12,6 +13,7 @@ loader.load().then(() => {
   const map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 45.51223, lng: -122.658722 },
     zoom: 11,
+    options: {styles: mapStyles, disableDefaultUI: true, zoomControl: true}
   });
 
   //we will map locations over the marker object
