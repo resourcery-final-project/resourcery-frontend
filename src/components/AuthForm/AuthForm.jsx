@@ -1,3 +1,4 @@
+
 import { useForm } from '../../hooks/useForm';
 import styles from '../../App.module.css'
 
@@ -41,4 +42,4 @@ export default function AuthForm({ handleAuth, isSigningUp }) {
       </button>
     </form>
   );
-}
+

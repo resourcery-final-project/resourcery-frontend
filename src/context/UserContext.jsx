@@ -1,9 +1,12 @@
 import { useState, createContext, useContext } from 'react';
+
 import { getUser } from '../services/users';
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
+
+
   const currentUser = getUser();
 
   const [user, setUser] = useState(
