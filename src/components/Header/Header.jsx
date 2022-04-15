@@ -1,6 +1,6 @@
-
+import '../../App.module.css'
 export default function Header() {
   return (
-    <div>Header</div>
+    <header>Header</header>
   )
 }

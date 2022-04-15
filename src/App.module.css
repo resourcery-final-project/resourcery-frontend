@@ -24,3 +24,10 @@ h1 {
     font-family: 'Josefin Slab', serif;
 
 }
+
+header {
+    position: absolute;
+    background-color: #FFE8D6;
+    left: 0;
+    width: 100vw;
+}
