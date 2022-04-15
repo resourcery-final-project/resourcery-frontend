@@ -42,4 +42,3 @@ export default function AuthForm({ handleAuth, isSigningUp }) {
       </button>
     </form>
   );
-}

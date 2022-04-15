@@ -38,4 +38,3 @@ export default function Auth({ isSigningUp = false }) {
     </div>
   );
 }
-
