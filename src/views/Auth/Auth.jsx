@@ -31,6 +31,7 @@ export default function Auth({ isSigningUp = false }) {
 
   return (
     <div>
+      <h1>resourcery</h1>
       <AuthForm handleAuth={handleAuth} isSigningUp={isSigningUp} />
     </div>
   );
