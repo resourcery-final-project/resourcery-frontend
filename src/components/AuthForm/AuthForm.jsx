@@ -37,7 +37,7 @@ export default function AuthForm({ handleAuth, isSigningUp }) {
       />
 
       <button onClick={handleSubmit}>
-        {isSigningUp ? 'Register' : 'Sign In'}
+        {isSigningUp ? 'Sign Up' : 'Sign In'}
       </button>
     </form>
   );
