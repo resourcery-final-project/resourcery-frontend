@@ -8,6 +8,8 @@ header {
     top: 0px;
     height: 10vh;
     opacity: .85;
+    display: flex;
+    justify-content: space-between;
     
 }
 
