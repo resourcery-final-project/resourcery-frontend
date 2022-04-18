@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;600&display=swap');
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* display: flex;
+    flex-direction: column; */
+    /* align-items: center; */
     background-color: #B7B7A4;
     font-family: 'Josefin Slab', serif;
     
@@ -17,15 +17,15 @@ body {
     gap: 2vw;
 }
 
-h1 {
+/* h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'Josefin Slab', serif;
 
-}
+} */
 
-header {
+/* header {
     position: absolute;
     background-color: #FFE8D6;
     left: 0;
@@ -35,6 +35,6 @@ header {
     height: 10vh;
     opacity: .85;
     
-}
+} */
 
 
