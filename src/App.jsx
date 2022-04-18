@@ -2,6 +2,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Auth from './views/Auth/Auth';
 import Map from './views/Map/Map';
+import Resource from './views/Resource/Resource';
+import ResourceDetail from './views/ResourceDetail/ResourceDetail';
+import List from './views/List/List';
+import UserProfile from './views/UserProfile/UserProfile';
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -15,7 +20,19 @@ export default function App() {
         <Route exact path="/">
           <Map />
         </Route>
-      </Switch> 
+        <Route path="/resourceform">
+          <Resource />
+        </Route>
+        <Route path="/resource/:id">
+          <ResourceDetail />
+        </Route>
+        <Route path="/user">
+          <UserProfile />
+        </Route>
+        <Route path="/list">
+          <List />
+        </Route>
+      </Switch>
       <Header />
     </BrowserRouter>
   );
