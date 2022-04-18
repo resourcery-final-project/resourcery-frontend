@@ -1,5 +1,5 @@
 
-export default function Map() {
+export default function MapComponent() {
   return (
     <div>Map</div>
   )
