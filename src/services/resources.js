@@ -1,10 +1,10 @@
-export async function createResource(formState, userId) {
-  const res = await fetch(`${process.env.API_URL}/api/v1/resources`, {
+export async function createResource(formState) {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/resources`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
     mode: 'cors',
-    body: JSON.stringify({ formState, userId }),
+    body: JSON.stringify(formState),
   });
 
   if (!res.ok)

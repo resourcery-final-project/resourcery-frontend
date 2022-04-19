@@ -8,10 +8,15 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 export default function MapView() {
   const [newMarkers, setNewMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [mapCenter, setMapCenter] = useState({ lat: 45.51223, lng: -122.658722 })
+  const [mapCenter, setMapCenter] = useState({
+    lat: 45.51223,
+    lng: -122.658722,
+  });
 
+  const libraries = ['places'];
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBdNq9njCHnPId5ilXIgn7LvnexfHImuWU',
+    googleMapsApiKey: 'AIzaSyB_CW_olHj572sQ6AURzEjfzrFK2bhz5J8',
+    libraries,
   });
   const mapContainerStyle = {
     width: '100vw',
@@ -19,8 +24,7 @@ export default function MapView() {
   };
 
   // retain position during rerender
-  const center = 
-  useMemo(() => (mapCenter), [mapCenter]);
+  const center = useMemo(() => mapCenter, [mapCenter]);
   const options = {
     styles: mapStyles,
     disableDefaultUI: true,
@@ -29,7 +33,7 @@ export default function MapView() {
 
   // no dependancy in useCallback prevents rerender
   const onMapClick = useCallback((event) => {
-      //keep added markers with spread
+    //keep added markers with spread
     setNewMarkers((current) => [
       ...current,
       {
@@ -50,29 +54,30 @@ export default function MapView() {
   const panToLocation = ({ lat, lng }) => {
     mapRef.current.panToLocation({ lat, lng });
     mapRef.current.setZoom(13);
-  }
-//   const panToLocation = useCallback(({ lat, lng }) => {
-//     mapRef.current.panToLocation({ lat, lng });
-//     mapRef.current.setZoom(13);
-//   }, []);
+  };
+  //   const panToLocation = useCallback(({ lat, lng }) => {
+  //     mapRef.current.panToLocation({ lat, lng });
+  //     mapRef.current.setZoom(13);
+  //   }, []);
 
   function LocateUser({ panToLocation }) {
     return (
       <button
         className="locate"
         onClick={() => {
-          navigator.geolocation.getCurrentPosition((position) => {
-            console.log(position)
-            const { latitude, longitude } = position.coords;
-            console.log({ latitude, longitude })
-            setMapCenter({ lat: latitude, lng: longitude })
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              console.log(position);
+              const { latitude, longitude } = position.coords;
+              console.log({ latitude, longitude });
+              setMapCenter({ lat: latitude, lng: longitude });
 
-            // panToLocation({
-            //   lat: position.coords.latitude,
-            //   lng: position.coords.longitude,
-            // });
-          },
-          // empty function for failure condition
+              // panToLocation({
+              //   lat: position.coords.latitude,
+              //   lng: position.coords.longitude,
+              // });
+            },
+            // empty function for failure condition
             () => null
           );
         }}
@@ -88,7 +93,7 @@ export default function MapView() {
   return (
     //   <Map />
     <>
-      <LocateUser panToLocation={panToLocation}/>
+      <LocateUser panToLocation={panToLocation} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={11}

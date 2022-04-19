@@ -1,11 +1,11 @@
 import { useForm } from '../../hooks/useForm';
 import { useState } from 'react';
+import AddressSearch from '../AddressSearch/AddressSearch';
 
-export default function ResourceForm(isCreating) {
+export default function ResourceForm({ isCreating, handleResource }) {
   const [formImage, setFormImage] = useState(null);
-  const [rescource, setResource] = useState({});
 
-  const { formState, handleFormChange } = useForm({
+  const { formState, setFormState, handleFormChange } = useForm({
     latitude: null,
     longitude: null,
     type: '',
@@ -17,15 +17,16 @@ export default function ResourceForm(isCreating) {
     phone: '',
   });
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    console.log('hello');
+    console.log('formState', formState);
+    await handleResource(formState);
   };
 
   const myWidget = window.cloudinary.createUploadWidget(
     {
-      cloudName: process.env.CLOUDINARY_NAME,
-      uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
+      cloudName: process.env.REACT_APP_CLOUDINARY_NAME,
+      uploadPreset: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET,
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
@@ -34,6 +35,7 @@ export default function ResourceForm(isCreating) {
       }
     }
   );
+
   return (
     <form>
       <h2>Offer a new resource</h2>
@@ -75,9 +77,10 @@ export default function ResourceForm(isCreating) {
           onChange={handleFormChange}
         >
           <option value="">Select</option>
-          <option value="food-bank">Food Bank</option>
-          <option value="fruit-tree">Fruit Tree</option>
-          <option value="free-meals">Free Meals</option>
+          <option value="Food Bank">Food Bank</option>
+          <option value="Food Box">Food Box</option>
+          <option value="Fruit Tree">Fruit Tree</option>
+          <option value="Ready To Eat">Ready To Eat</option>
         </select>
       </label>
 
@@ -107,14 +110,7 @@ export default function ResourceForm(isCreating) {
 
       <label>
         Address:
-        <input
-          name="address"
-          type="text"
-          placeholder="address"
-          aria-label="address"
-          value={formState.address}
-          onChange={handleFormChange}
-        />
+        <AddressSearch setFormState={setFormState} />
       </label>
 
       <label>
