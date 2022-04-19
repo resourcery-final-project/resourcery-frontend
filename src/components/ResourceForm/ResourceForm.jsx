@@ -1,6 +1,10 @@
 import { useForm } from '../../hooks/useForm';
+import { useState } from 'react';
 
-export default function ResourceForm() {
+export default function ResourceForm(isCreating) {
+  const [formImage, setFormImage] = useState(null);
+  const [rescource, setResource] = useState({});
+
   const { formState, handleFormChange } = useForm({
     latitude: null,
     longitude: null,
@@ -8,11 +12,15 @@ export default function ResourceForm() {
     description: '',
     image: '',
     hours: '',
-    available: false,
     title: '',
     address: '',
     phone: '',
   });
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    console.log('hello');
+  };
 
   const myWidget = window.cloudinary.createUploadWidget(
     {
@@ -22,6 +30,7 @@ export default function ResourceForm() {
     (error, result) => {
       if (!error && result && result.event === 'success') {
         console.log('Done! Here is the image info: ', result.info);
+        setFormImage(result.info.url);
       }
     }
   );
@@ -40,18 +49,31 @@ export default function ResourceForm() {
         />
       </label>
 
-      <button
-        name="image"
-        id="upload_widget"
-        value={formState.image}
-        onClick={() => myWidget.open()}
-      >
-        Upload an Image
-      </button>
+      {!formImage ? (
+        <button
+          name="image"
+          id="upload_widget"
+          value={formState.image}
+          onChange={handleFormChange}
+          onClick={(e) => {
+            e.preventDefault();
+            myWidget.open();
+          }}
+        >
+          Upload an Image
+        </button>
+      ) : (
+        <img src={formImage} />
+      )}
 
       <label>
         Type:
-        <select name="type" id="type">
+        <select
+          name="type"
+          id="type"
+          value={formState.type}
+          onChange={handleFormChange}
+        >
           <option value="">Select</option>
           <option value="food-bank">Food Bank</option>
           <option value="fruit-tree">Fruit Tree</option>
@@ -61,34 +83,53 @@ export default function ResourceForm() {
 
       <label>
         Description:
-        <input />
+        <input
+          name="description"
+          type="text"
+          placeholder="description"
+          aria-label="description"
+          value={formState.description}
+          onChange={handleFormChange}
+        />
       </label>
 
       <label>
         Hours:
-        <input />
+        <input
+          name="hours"
+          type="text"
+          placeholder="hours"
+          aria-label="hours"
+          value={formState.hours}
+          onChange={handleFormChange}
+        />
       </label>
 
       <label>
-        Address / Coordinates:
-        <input />
+        Address:
+        <input
+          name="address"
+          type="text"
+          placeholder="address"
+          aria-label="address"
+          value={formState.address}
+          onChange={handleFormChange}
+        />
       </label>
 
       <label>
         Phone:
-        <input />
+        <input
+          name="phone"
+          type="text"
+          placeholder="phone"
+          aria-label="phone"
+          value={formState.phone}
+          onChange={handleFormChange}
+        />
       </label>
 
-      <label>
-        Currently Available:
-        <select name="available" id="available">
-          <option value="">Select</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-      </label>
-
-      <button>Save</button>
+      <button onClick={handleSave}>Save</button>
     </form>
   );
 }
