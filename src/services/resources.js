@@ -1,5 +1,5 @@
 export async function createResource(formState) {
-  const res = await fetch(`${process.env.API_URL}/api/v1/resources`, {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/resources`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',

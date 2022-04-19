@@ -1,6 +1,6 @@
 export async function getUser() {
   try {
-    const res = await fetch(`${process.env.API_URL}/api/v1/users/current`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/current`, {
       credentials: 'include',
     });
     return res.json();
@@ -10,7 +10,7 @@ export async function getUser() {
 }
 
 export async function signIn(username, password) {
-  const res = await fetch(`${process.env.API_URL}/api/v1/users/session`, {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/session`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -24,7 +24,7 @@ export async function signIn(username, password) {
 }
 
 export async function signUp(username, password) {
-  const res = await fetch(`${process.env.API_URL}/api/v1/users`, {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -38,7 +38,7 @@ export async function signUp(username, password) {
 }
 
 export async function signOut() {
-  const res = await fetch(`${process.env.API_URL}/api/v1/users`, {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users`, {
     method: 'DELETE',
     credentials: 'include',
     mode: 'cors',
