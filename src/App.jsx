@@ -20,7 +20,10 @@ export default function App() {
         <Route exact path="/">
           <Map />
         </Route>
-        <Route path="/resourceform">
+        <Route path="/create-resource">
+          <Resource isCreating />
+        </Route>
+        <Route path="/update-resource">
           <Resource />
         </Route>
         <Route path="/resource/:id">

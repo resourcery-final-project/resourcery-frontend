@@ -1,9 +1,22 @@
 import ResourceForm from '../../components/ResourceForm/ResourceForm';
 
-export default function Resource() {
+export default function Resource({ isCreating = false }) {
+  const handleResource = (
+    type,
+    description,
+    image,
+    hours,
+    title,
+    address,
+    phone
+  ) => {
+    if (isCreating) {
+    }
+  };
+
   return (
     <div>
-      <ResourceForm />
+      <ResourceForm isCreating={isCreating} />
     </div>
   );
 }
