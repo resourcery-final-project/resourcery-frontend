@@ -3,9 +3,9 @@ import { useForm } from '../../hooks/useForm';
 import { createResource } from '../../services/resources';
 
 export default function Resource({ isCreating = false }) {
-  const handleResource = async (formState, userId) => {
+  const handleResource = async (formState) => {
     if (isCreating) {
-      const data = await createResource(formState, userId);
+      const data = await createResource(formState);
       return data;
     }
   };

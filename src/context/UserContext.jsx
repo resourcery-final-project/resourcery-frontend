@@ -9,7 +9,11 @@ export function UserProvider({ children }) {
   useEffect(() => {
     async function fetchData() {
       const currentUser = await getUser();
-      setUser({ id: currentUser.id, username: currentUser.username });
+      setUser(
+        currentUser
+          ? { id: currentUser.id, username: currentUser.username }
+          : {}
+      );
     }
     fetchData();
   }, []);
