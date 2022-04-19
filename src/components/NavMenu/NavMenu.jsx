@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { NavLink } from 'react-router-dom';
 
 export default function NavMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -32,9 +33,11 @@ export default function NavMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Resource List</MenuItem>
+        <MenuItem onClick={handleClose}><NavLink to="/">Home</NavLink></MenuItem>
         <hr />
-        <MenuItem onClick={handleClose}>My Profile</MenuItem>
+        <MenuItem onClick={handleClose}><NavLink to="/list">Resource List</NavLink></MenuItem>
+        <hr />
+        <MenuItem onClick={handleClose}><NavLink to="/user">My Profile</NavLink></MenuItem>
         <hr />
         <MenuItem onClick={handleClose}>About Us</MenuItem>
         <hr />
