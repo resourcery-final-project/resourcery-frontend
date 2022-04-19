@@ -1,14 +1,18 @@
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, useEffect } from 'react';
 import { getUser } from '../services/users';
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const currentUser = getUser();
+  const [user, setUser] = useState({});
 
-  const [user, setUser] = useState(
-    currentUser ? { id: currentUser.id, username: currentUser.username } : {}
-  );
+  useEffect(() => {
+    async function fetchData() {
+      const currentUser = await getUser();
+      setUser({ id: currentUser.id, username: currentUser.username });
+    }
+    fetchData();
+  }, []);
 
   const userValues = { user, setUser };
 

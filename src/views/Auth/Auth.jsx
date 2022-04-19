@@ -5,23 +5,18 @@ import { signIn, signUp } from '../../services/users';
 import AuthForm from '../../components/AuthForm/AuthForm';
 
 export default function Auth({ isSigningUp = false }) {
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   const history = useHistory();
-
-  const { formState, handleFormChange } = useForm({
-    username: '',
-    password: '',
-  });
 
   async function handleAuth(username, password) {
     try {
       if (isSigningUp) {
         const data = await signUp(username, password);
-        setUser({ id: data.id, username: data.username });
+        setUser({ id: data.user.id, username: data.user.username });
         history.replace('/');
       } else {
         const data = await signIn(username, password);
-        setUser({ id: data.id, username: data.username });
+        setUser({ id: data.user.id, username: data.user.username });
         history.replace('/');
       }
     } catch (error) {

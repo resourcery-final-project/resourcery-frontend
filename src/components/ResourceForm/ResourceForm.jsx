@@ -1,7 +1,9 @@
 import { useForm } from '../../hooks/useForm';
 import { useState } from 'react';
+import { useUser } from '../../context/UserContext';
 
-export default function ResourceForm(isCreating) {
+export default function ResourceForm(isCreating, handleResource) {
+  const { user } = useUser();
   const [formImage, setFormImage] = useState(null);
   const [rescource, setResource] = useState({});
 
@@ -17,9 +19,11 @@ export default function ResourceForm(isCreating) {
     phone: '',
   });
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    console.log('hello');
+    console.log('formState', formState);
+    console.log('user.id', user.id);
+    await handleResource(formState, user.id);
   };
 
   const myWidget = window.cloudinary.createUploadWidget(

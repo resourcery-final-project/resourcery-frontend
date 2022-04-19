@@ -1,22 +1,18 @@
 import ResourceForm from '../../components/ResourceForm/ResourceForm';
+import { useForm } from '../../hooks/useForm';
+import { createResource } from '../../services/resources';
 
 export default function Resource({ isCreating = false }) {
-  const handleResource = (
-    type,
-    description,
-    image,
-    hours,
-    title,
-    address,
-    phone
-  ) => {
+  const handleResource = async (formState, userId) => {
     if (isCreating) {
+      const data = await createResource(formState, userId);
+      return data;
     }
   };
 
   return (
     <div>
-      <ResourceForm isCreating={isCreating} />
+      <ResourceForm isCreating={isCreating} handleResource={handleResource} />
     </div>
   );
 }
