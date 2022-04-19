@@ -1,6 +1,10 @@
 
 export default function List() {
   return (
-    <div>List</div>
+    <div>
+      <ul>
+        <li>Resource 1</li>
+      </ul>
+    </div>
   )
 }
