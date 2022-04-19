@@ -4,7 +4,7 @@ import Auth from './views/Auth/Auth';
 import Map from './views/Map/Map';
 import Resource from './views/Resource/Resource';
 import ResourceDetail from './views/ResourceDetail/ResourceDetail';
-import List from './views/List/List';
+import List from './views/ResourceList/ResourceList';
 import UserProfile from './views/UserProfile/UserProfile';
 
 export default function App() {

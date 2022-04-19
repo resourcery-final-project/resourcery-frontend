@@ -1,6 +1,7 @@
 import { InfoWindow, useLoadScript } from '@react-google-maps/api';
 import { GoogleMap, Marker, MarkerClusterer } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
+import styles from'./Map.css'
 // import Map from '../../components/map/map'
 
 import { useCallback, useMemo, useRef, useState } from 'react';
@@ -12,6 +13,8 @@ export default function MapView() {
     lat: 45.51223,
     lng: -122.658722,
   });
+
+  const { map } = styles;
 
   const libraries = ['places'];
   const { isLoaded, loadError } = useLoadScript({
@@ -92,7 +95,7 @@ export default function MapView() {
 
   return (
     //   <Map />
-    <>
+    <div className={map}>
       <LocateUser panToLocation={panToLocation} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -131,6 +134,6 @@ export default function MapView() {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-    </>
+    </div>
   );
 }

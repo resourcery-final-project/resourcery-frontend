@@ -14,11 +14,12 @@ export default function NavMenu() {
     setAnchorEl(null);
   };
 
-  const {nav_burger} = styles;
+  const {nav_burger, nav_button} = styles;
 
   return (
     <div>
       <Button
+        className={nav_button}
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"

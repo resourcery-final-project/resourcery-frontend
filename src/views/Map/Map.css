@@ -1,6 +1,4 @@
-
-
 .map {
-    position: inherit !important;
-    margin-top: 10vh;
+  position: inherit !important;
+  margin-top: 0vh !important;
 }
