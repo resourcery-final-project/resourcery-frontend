@@ -1,9 +1,12 @@
 import { useForm } from '../../hooks/useForm';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import AddressSearch from '../AddressSearch/AddressSearch';
 
 export default function ResourceForm({ isCreating, handleResource }) {
   const [formImage, setFormImage] = useState(null);
+
+  const history = useHistory();
 
   const { formState, setFormState, handleFormChange } = useForm({
     latitude: null,
@@ -19,8 +22,8 @@ export default function ResourceForm({ isCreating, handleResource }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    console.log('formState', formState);
     await handleResource(formState);
+    history.replace('/user');
   };
 
   const myWidget = window.cloudinary.createUploadWidget(
