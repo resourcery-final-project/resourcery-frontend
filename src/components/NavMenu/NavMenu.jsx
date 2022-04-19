@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
-import './NavMenu.css'
+import styles from './NavMenu.css'
 
 export default function NavMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -14,6 +14,8 @@ export default function NavMenu() {
     setAnchorEl(null);
   };
 
+  const {nav_burger} = styles;
+
   return (
     <div>
       <Button
@@ -23,7 +25,7 @@ export default function NavMenu() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <h3>|||</h3>
+        <h3 className={nav_burger}>|||</h3>
       </Button>
       <Menu
         id="basic-menu"
