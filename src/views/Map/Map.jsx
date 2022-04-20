@@ -2,8 +2,7 @@ import { InfoWindow, useLoadScript } from '@react-google-maps/api';
 import { GoogleMap, Marker, MarkerClusterer } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
 import styles from'./Map.css'
-// import Map from '../../components/map/map'
-
+import LocateButton from '../../components/LocateButton/LocateButton';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 export default function MapView() {
@@ -54,41 +53,10 @@ export default function MapView() {
     mapRef.current = map;
   }, []);
   // pans to given location once per mount
-  const panToLocation = ({ lat, lng }) => {
-    mapRef.current.panToLocation({ lat, lng });
-    mapRef.current.setZoom(13);
-  };
-  //   const panToLocation = useCallback(({ lat, lng }) => {
-  //     mapRef.current.panToLocation({ lat, lng });
-  //     mapRef.current.setZoom(13);
-  //   }, []);
 
-  function LocateUser({ panToLocation }) {
-    return (
-      <button
-        className="locate"
-        onClick={() => {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              console.log(position);
-              const { latitude, longitude } = position.coords;
-              console.log({ latitude, longitude });
-              setMapCenter({ lat: latitude, lng: longitude });
 
-              // panToLocation({
-              //   lat: position.coords.latitude,
-              //   lng: position.coords.longitude,
-              // });
-            },
-            // empty function for failure condition
-            () => null
-          );
-        }}
-      >
-        Locate
-      </button>
-    );
-  }
+
+
 
   if (loadError) return 'Error Loading Map';
   if (!isLoaded) return <p>Loading...</p>;
@@ -96,7 +64,7 @@ export default function MapView() {
   return (
     //   <Map />
     <div className={map}>
-      <LocateUser panToLocation={panToLocation} />
+      <LocateButton setMapCenter={setMapCenter}/>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={11}
