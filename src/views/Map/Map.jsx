@@ -1,11 +1,11 @@
 import { InfoWindow, useLoadScript } from '@react-google-maps/api';
 import { GoogleMap, Marker, MarkerClusterer } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
-import styles from'./Map.css'
+import styles from './Map.css';
 import LocateButton from '../../components/LocateButton/LocateButton';
 import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
 import { getAllResources } from '../../services/resources';
-
+import { Link } from 'react-router-dom';
 
 export default function MapView() {
   const [newMarkers, setNewMarkers] = useState([]);
@@ -18,7 +18,7 @@ export default function MapView() {
 
   const { map } = styles;
 
-  const [ libraries ] = useState(['places']);
+  const [libraries] = useState(['places']);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -36,7 +36,6 @@ export default function MapView() {
     disableDefaultUI: true,
     zoomControl: true,
   };
- 
 
   useEffect(() => {
     async function fetchData() {
@@ -79,32 +78,41 @@ export default function MapView() {
         onLoad={onMapLoad}
       >
         {list.map((marker) => (
-          <Marker
-            key={marker.id}
-            position={{ lat: Number(marker.latitude), lng: Number(marker.longitude) }}
-            icon={{
-              url: '/assets/soup.png',
-              scaledSize: new window.google.maps.Size(30, 30),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-            }}
-            onClick={() => {
-              setSelectedMarker(marker);
-            }}
-          />
+          <div key={marker.id}>
+            <Marker
+              position={{
+                lat: Number(marker.latitude),
+                lng: Number(marker.longitude),
+              }}
+              icon={{
+                url: '/assets/soup.png',
+                scaledSize: new window.google.maps.Size(30, 30),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+              }}
+              onClick={() => {
+                setSelectedMarker(marker);
+              }}
+            />
+            {selectedMarker ? (
+              <InfoWindow
+                position={{
+                  lat: Number(selectedMarker.lat),
+                  lng: Number(selectedMarker.lng),
+                }}
+                onCloseClick={() => {
+                  setSelectedMarker(null);
+                }}
+              >
+                <div>
+                  <Link to={`/resource/${selectedMarker.id}`}>
+                    {selectedMarker.title}
+                  </Link>
+                </div>
+              </InfoWindow>
+            ) : null}
+          </div>
         ))}
-        {selectedMarker ? (
-          <InfoWindow
-            position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}
-            onCloseClick={() => {
-              setSelectedMarker(null);
-            }}
-          >
-            <div>
-              <h3>Free Soup</h3>
-            </div>
-          </InfoWindow>
-        ) : null}
       </GoogleMap>
     </div>
   );
