@@ -1,10 +1,8 @@
 import { useForm } from '../../hooks/useForm';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AddressSearch from '../AddressSearch/AddressSearch';
 
-export default function ResourceForm({ isCreating, handleResource, resource }) {
-  const [formImage, setFormImage] = useState(null);
+export default function ResourceForm({ isCreating, handleResource }) {
 
   const history = useHistory();
 
@@ -27,6 +25,7 @@ export default function ResourceForm({ isCreating, handleResource, resource }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    console.log(formState);
     await handleResource(formState);
     history.replace('/user');
   };
@@ -38,14 +37,17 @@ export default function ResourceForm({ isCreating, handleResource, resource }) {
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
-        console.log('Done! Here is the image info: ', result.info);
-        setFormImage(result.info.url);
+        console.log('Done! Here is the image info: ', result.info.url);
+        setFormState((prevState) => {
+          console.log(prevState);
+          return { ...prevState, image: result.info.url };
+        });
       }
     }
   );
 
   return (
-    <form>
+    <form onSubmit={handleSave}>
       <h2>Offer a new resource</h2>
       <label>
         Title:
@@ -59,12 +61,12 @@ export default function ResourceForm({ isCreating, handleResource, resource }) {
         />
       </label>
 
-      {!formImage ? (
+      {!formState.image ? (
         <button
-          name="image"
+          // name="image"
           id="upload_widget"
-          value={formState.image}
-          onChange={handleFormChange}
+          // value={formState.image}
+          // onChange={handleFormChange}
           onClick={(e) => {
             e.preventDefault();
             myWidget.open();
@@ -73,7 +75,14 @@ export default function ResourceForm({ isCreating, handleResource, resource }) {
           Upload an Image
         </button>
       ) : (
-        <img src={formImage} />
+        <>
+          <img src={formState.image} />
+          <input
+            name="image"
+            value={formState.image}
+            onChange={handleFormChange}
+          />
+        </>
       )}
 
       <label>
@@ -133,7 +142,7 @@ export default function ResourceForm({ isCreating, handleResource, resource }) {
         />
       </label>
 
-      <button onClick={handleSave}>Save</button>
+      <button type="submit">Save</button>
     </form>
   );
 }
