@@ -11,8 +11,7 @@ export default function Auth({ isSigningUp = false }) {
     try {
       if (isSigningUp) {
         const data = await signUp(username, password);
-        console.log(data);
-        setUser({ id: data.user.id, username: data.user.username });
+        setUser({ id: data.id, username: data.username });
         history.replace('/');
       } else {
         const data = await signIn(username, password);

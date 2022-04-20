@@ -21,7 +21,6 @@ export default function Resource({ isCreating = false }) {
       }
       fetchData();
     }, [id]);
-    console.log(resource);
   } else {
     setLoading(false);
   }

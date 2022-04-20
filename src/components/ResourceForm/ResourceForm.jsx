@@ -1,7 +1,6 @@
 import { useForm } from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom';
 import AddressSearch from '../AddressSearch/AddressSearch';
-import Resource from '../../views/Resource/Resource';
 
 export default function ResourceForm({ isCreating, handleResource, resource }) {
   const history = useHistory();
@@ -20,7 +19,6 @@ export default function ResourceForm({ isCreating, handleResource, resource }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    console.log(formState);
     await handleResource(formState, resource.id);
     history.replace('/user');
   };
@@ -32,7 +30,6 @@ export default function ResourceForm({ isCreating, handleResource, resource }) {
     },
     (error, result) => {
       if (!error && result && result.event === 'success') {
-        console.log('Done! Here is the image info: ', result.info.url);
         setFormState((prevState) => {
           console.log(prevState);
           return { ...prevState, image: result.info.url };
