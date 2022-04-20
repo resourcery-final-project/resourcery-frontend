@@ -15,9 +15,14 @@ export default function ResourceDetail() {
     fetchData();
   }, []);
 
+  const handleDelete = async (id) => {
+    const data = await deleteById(id);
+    return data;
+  };
+
   return (
     <div>
-      <Detail detail={detail} />
+      <Detail detail={detail} handleDelete={handleDelete} />
     </div>
   );
 }
