@@ -14,7 +14,9 @@ export default function Detail({ detail }) {
       <p>{detail.phone}</p>
       {user.id === detail.userId && (
         <>
-          <button onClick={() => history.push('/update-resource')}>Edit</button>
+          <button onClick={() => history.push(`/update-resource/${detail.id}`)}>
+            Edit
+          </button>
           <button>Delete</button>
         </>
       )}

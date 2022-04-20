@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AddressSearch from '../AddressSearch/AddressSearch';
 
-export default function ResourceForm({ isCreating, handleResource }) {
+export default function ResourceForm({ isCreating, handleResource, resource }) {
   const [formImage, setFormImage] = useState(null);
 
   const history = useHistory();
@@ -19,6 +19,11 @@ export default function ResourceForm({ isCreating, handleResource }) {
     address: '',
     phone: '',
   });
+
+  if (!isCreating) {
+    setFormState(resource);
+    console.log(formState);
+  }
 
   const handleSave = async (e) => {
     e.preventDefault();

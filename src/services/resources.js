@@ -58,11 +58,11 @@ export async function getDetailById(id) {
   return res.json();
 }
 
-export async function updateById(id) {
+export async function updateResource(formState) {
   const res = await fetch(
     `${process.env.REACT_APP_API_URL}/api/v1/resources/${id}`,
     {
-      method: 'UPDATE',
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       mode: 'cors',
