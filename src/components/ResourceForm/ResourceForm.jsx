@@ -18,6 +18,11 @@ export default function ResourceForm({ isCreating, handleResource }) {
     phone: '',
   });
 
+  if (!isCreating) {
+    setFormState(resource);
+    console.log(formState);
+  }
+
   const handleSave = async (e) => {
     e.preventDefault();
     console.log(formState);

@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/create-resource">
           <Resource isCreating />
         </Route>
-        <Route path="/update-resource">
+        <Route path="/update-resource/:id">
           <Resource />
         </Route>
         <Route path="/resource/:id">
