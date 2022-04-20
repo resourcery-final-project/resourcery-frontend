@@ -3,7 +3,9 @@ import { GoogleMap, Marker, MarkerClusterer } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
 import styles from'./Map.css'
 import LocateButton from '../../components/LocateButton/LocateButton';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
+import { getAllResources } from '../../services/resources';
+
 
 export default function MapView() {
   const [newMarkers, setNewMarkers] = useState([]);
@@ -12,14 +14,16 @@ export default function MapView() {
     lat: 45.51223,
     lng: -122.658722,
   });
+  const [list, setList] = useState([]);
 
   const { map } = styles;
 
-  const libraries = ['places'];
+  const [ libraries ] = useState(['places']);
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyB_CW_olHj572sQ6AURzEjfzrFK2bhz5J8',
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+
   const mapContainerStyle = {
     width: '100vw',
     height: '100vh',
@@ -32,51 +36,52 @@ export default function MapView() {
     disableDefaultUI: true,
     zoomControl: true,
   };
+ 
 
-  // no dependancy in useCallback prevents rerender
-  const onMapClick = useCallback((event) => {
-    //keep added markers with spread
-    setNewMarkers((current) => [
-      ...current,
-      {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getAllResources();
+      setList(data);
+    }
+    fetchData();
   }, []);
-
+  // no dependancy in useCallback prevents rerender
+  // const onMapClick = useCallback((event) => {
+  //   //keep added markers with spread
+  //   setNewMarkers((current) => [
+  //     ...current,
+  //     {
+  //       lat: event.latLng.lat(),
+  //       lng: event.latLng.lng(),
+  //       time: new Date(),
+  //     },
+  //   ]);
+  // }, []);
   // make 'box' to save map instance
   const mapRef = useRef();
-  // return saved map instance on rerender
+  // // return saved map instance on rerender
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
-  // pans to given location once per mount
-
-
-
-
 
   if (loadError) return 'Error Loading Map';
   if (!isLoaded) return <p>Loading...</p>;
 
   return (
-    //   <Map />
     <div className={map}>
-      <LocateButton setMapCenter={setMapCenter}/>
+      {/* <LocateButton setMapCenter={setMapCenter}/> */}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={11}
         center={center}
         options={options}
-        onClick={onMapClick}
+        // onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {newMarkers.map((marker) => (
+        {list.map((marker) => (
           <Marker
-            key={marker.time}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            key={marker.id}
+            position={{ lat: Number(marker.latitude), lng: Number(marker.longitude) }}
             icon={{
               url: '/assets/soup.png',
               scaledSize: new window.google.maps.Size(30, 30),
@@ -85,7 +90,6 @@ export default function MapView() {
             }}
             onClick={() => {
               setSelectedMarker(marker);
-              console.log(selectedMarker);
             }}
           />
         ))}
