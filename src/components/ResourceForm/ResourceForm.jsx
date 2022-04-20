@@ -1,32 +1,27 @@
 import { useForm } from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom';
 import AddressSearch from '../AddressSearch/AddressSearch';
+import Resource from '../../views/Resource/Resource';
 
-export default function ResourceForm({ isCreating, handleResource }) {
-
+export default function ResourceForm({ isCreating, handleResource, resource }) {
   const history = useHistory();
 
   const { formState, setFormState, handleFormChange } = useForm({
-    latitude: null,
-    longitude: null,
-    type: '',
-    description: '',
-    image: '',
-    hours: '',
-    title: '',
-    address: '',
-    phone: '',
+    latitude: resource.latitude || null,
+    longitude: resource.longitude || null,
+    type: resource.type || '',
+    description: resource.description || '',
+    image: resource.image || '',
+    hours: resource.hours || '',
+    title: resource.title || '',
+    address: resource.address || '',
+    phone: resource.phone || '',
   });
-
-  if (!isCreating) {
-    setFormState(resource);
-    console.log(formState);
-  }
 
   const handleSave = async (e) => {
     e.preventDefault();
     console.log(formState);
-    await handleResource(formState);
+    await handleResource(formState, resource.id);
     history.replace('/user');
   };
 
@@ -48,7 +43,11 @@ export default function ResourceForm({ isCreating, handleResource }) {
 
   return (
     <form onSubmit={handleSave}>
-      <h2>Offer a new resource</h2>
+      {!resource ? (
+        <h2>Offer a new resource</h2>
+      ) : (
+        <h2>Update current Resource</h2>
+      )}
       <label>
         Title:
         <input
@@ -63,10 +62,7 @@ export default function ResourceForm({ isCreating, handleResource }) {
 
       {!formState.image ? (
         <button
-          // name="image"
           id="upload_widget"
-          // value={formState.image}
-          // onChange={handleFormChange}
           onClick={(e) => {
             e.preventDefault();
             myWidget.open();
@@ -77,11 +73,6 @@ export default function ResourceForm({ isCreating, handleResource }) {
       ) : (
         <>
           <img src={formState.image} />
-          <input
-            name="image"
-            value={formState.image}
-            onChange={handleFormChange}
-          />
         </>
       )}
 
@@ -125,10 +116,14 @@ export default function ResourceForm({ isCreating, handleResource }) {
         />
       </label>
 
-      <label>
-        Address:
-        <AddressSearch setFormState={setFormState} />
-      </label>
+      {!formState.address ? (
+        <label>
+          Address:
+          <AddressSearch setFormState={setFormState} />
+        </label>
+      ) : (
+        <p>{formState.address}</p>
+      )}
 
       <label>
         Phone:
