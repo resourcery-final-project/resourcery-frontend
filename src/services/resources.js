@@ -12,3 +12,16 @@ export async function createResource(formState) {
 
   return res.json();
 }
+
+export async function getAllResources() {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/resources`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    mode: 'cors',
+  });
+
+  if (!res.ok) throw new Error('Unable to get all the resources');
+
+  return res.json();
+}
