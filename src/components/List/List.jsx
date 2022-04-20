@@ -8,11 +8,9 @@ export default function List({ list }) {
           <li key={item.id}>
             {item.image && <img src={item.image} alt={item.title} />}
             <h3>
-              <Link to={`/rescource/${item.id}`}>{item.title}</Link>
+              <Link to={`/resource/${item.id}`}>{item.title}</Link>
             </h3>
             <h4>{item.description}</h4>
-            <p>{item.hours}</p>
-            <p>{item.phone}</p>
           </li>
         ))}
       </ul>

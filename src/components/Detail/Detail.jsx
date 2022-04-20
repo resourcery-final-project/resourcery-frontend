@@ -1,10 +1,11 @@
 export default function Detail({ detail }) {
-  console.log(detail);
-  console.log('hello', hello);
   return (
     <div>
-      {detail.title}
-      <p>hello</p>
+      <h1>{detail.title}</h1>
+      {detail.image && <img src={detail.image} alt={detail.description} />}
+      <h3>{detail.description}</h3>
+      <p>{detail.hours}</p>
+      <p>{detail.phone}</p>
     </div>
   );
 }

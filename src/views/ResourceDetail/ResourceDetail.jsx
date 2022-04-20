@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Detail from '../../components/Detail/Detail';
 import { getDetailById } from '../../services/resources';
 
 export default function ResourceDetail() {
   const { id } = useParams();
-  const [detail, setDetail] = useState();
+  const [detail, setDetail] = useState({});
 
   useEffect(() => {
     async function fetchData() {
