@@ -13,8 +13,6 @@ export default function ResourceList() {
     fetchData();
   }, []);
 
-  console.log(list);
-
   return (
     <div>
       <div>
@@ -31,7 +29,7 @@ export default function ResourceList() {
           Fruit Trees
         </label>
       </div>
-      <List />
+      <List list={list} />
     </div>
   );
 }
