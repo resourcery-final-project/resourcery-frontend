@@ -33,6 +33,7 @@ export default function AuthForm({ handleAuth, isSigningUp }) {
       />
       <input
         name="password"
+        type="password"
         placeholder="password"
         aria-label="password"
         value={formState.password}

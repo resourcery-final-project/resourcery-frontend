@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getAllResources } from '../../services/resources';
 import List from '../../components/List/List';
+import styles from '../../App.module.css';
+
 
 export default function ResourceList() {
+  const { listview, filter } = styles;
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,7 +53,6 @@ export default function ResourceList() {
           Fruit Trees
         </label>
       </div>
-      <List list={list} />
-    </div>
+      </>
   );
 }

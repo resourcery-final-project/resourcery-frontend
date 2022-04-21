@@ -1,10 +1,12 @@
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
+import styles from '../../App.module.css';
 
 export default function ProfileDetail({ profileList }) {
   const history = useHistory();
   const { user } = useUser();
+  const { listview } = styles;
 
   return (
     <div>
@@ -18,7 +20,7 @@ export default function ProfileDetail({ profileList }) {
       </button>
 
       {profileList ? (
-        <ul>
+        <ul className={listview}>
           {profileList.map((item) => (
             <li key={item.id}>
               {item.image && <img src={item.image} alt={item.title} />}

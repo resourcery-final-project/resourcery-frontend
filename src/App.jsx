@@ -13,6 +13,7 @@ export default function App() {
   const { user } = useUser();
 
   return (
+    <div>
     <BrowserRouter>
       <Switch>
         <Route path="/signin">
@@ -42,5 +43,6 @@ export default function App() {
       </Switch>
       {user.username && <Header />}
     </BrowserRouter>
+    </div>
   );
 }
