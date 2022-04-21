@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import ResourceForm from '../../components/ResourceForm/ResourceForm';
 import { useParams } from 'react-router-dom';
 import {
   createResource,
   getDetailById,
   updateResource,
 } from '../../services/resources';
+import ResourceForm from '../../components/ResourceForm/ResourceForm';
 
 export default function Resource({ isCreating = false }) {
   const [resource, setResource] = useState({});
