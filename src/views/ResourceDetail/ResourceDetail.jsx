@@ -19,9 +19,10 @@ export default function ResourceDetail() {
 
   const handleDelete = async (id) => {
     try {
-      await deleteById(id);
-      confirm('Are you sure you want to delete?');
-      history.replace('/user');
+      if (confirm('Are you sure you want to delete?') == true) {
+        await deleteById(id);
+        history.replace('/user');
+      }
     } catch (error) {
       throw error;
     }

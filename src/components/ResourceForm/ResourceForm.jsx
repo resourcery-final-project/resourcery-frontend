@@ -2,9 +2,9 @@ import { useForm } from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom';
 import AddressSearch from '../AddressSearch/AddressSearch';
 
-export default function ResourceForm({ isCreating, handleResource, resource }) {
+export default function ResourceForm({ handleResource, resource }) {
   const history = useHistory();
-
+  console.log(resource);
   const { formState, setFormState, handleFormChange } = useForm({
     latitude: resource.latitude || null,
     longitude: resource.longitude || null,
