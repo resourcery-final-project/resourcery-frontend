@@ -6,7 +6,7 @@ import styles from '../../App.module.css';
 export default function ProfileDetail({ profileList }) {
   const history = useHistory();
   const { user } = useUser();
-  const { listview } = styles;
+  const { listview, img } = styles;
 
   return (
     <div>
@@ -23,7 +23,9 @@ export default function ProfileDetail({ profileList }) {
         <ul className={listview}>
           {profileList.map((item) => (
             <li key={item.id}>
-              {item.image && <img src={item.image} alt={item.title} />}
+              {item.image && (
+                <img className={img} src={item.image} alt={item.title} />
+              )}
               <h3>
                 <Link to={`/resource/${item.id}`}>{item.title}</Link>
               </h3>

@@ -51,8 +51,6 @@ export default function Header() {
           <NavLink to="/user">My Profile</NavLink>
         </MenuItem>
         <hr />
-        <MenuItem onClick={handleClose}>About Us</MenuItem>
-        <hr />
         <MenuItem
           onClick={async () => {
             console.log('click');

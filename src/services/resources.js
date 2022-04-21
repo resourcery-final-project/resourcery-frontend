@@ -92,3 +92,19 @@ export async function deleteById(id) {
 
   return res.json();
 }
+
+export async function getByType(type) {
+  const res = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/v1/resources/type/${type}`,
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      mode: 'cors',
+    }
+  );
+
+  if (!res.ok) throw new Error('Unable to get the resources.');
+
+  return res.json();
+}
