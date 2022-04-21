@@ -2,7 +2,6 @@ import { InfoWindow, useLoadScript } from '@react-google-maps/api';
 import { GoogleMap, Marker, MarkerClusterer } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
 import styles from './Map.css';
-import LocateButton from '../../components/LocateButton/LocateButton';
 import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
 import { getAllResources } from '../../services/resources';
 import { Link, useHistory } from 'react-router-dom';
@@ -67,6 +66,10 @@ export default function MapView() {
         center={center}
         options={options}
         onClick={(event) => {
+          console.log(            {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+          });
           //spread in current markers with new markers
           setNewMarkers((current) => [
             ...current,
@@ -147,6 +150,7 @@ export default function MapView() {
                 }}
                 onCloseClick={() => {
                   setSelectedNewMarker(null);
+                  setNewMarkers([]);
                 }}
               >
                 <div>
