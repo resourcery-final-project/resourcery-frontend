@@ -5,7 +5,7 @@ import styles from './Map.css';
 import LocateButton from '../../components/LocateButton/LocateButton';
 import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
 import { getAllResources } from '../../services/resources';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function MapView() {
   const [newMarkers, setNewMarkers] = useState([]);
@@ -16,6 +16,8 @@ export default function MapView() {
     lng: -122.658722,
   });
   const [list, setList] = useState([]);
+  const history = useHistory();
+
 
   const { map } = styles;
 
@@ -73,6 +75,12 @@ export default function MapView() {
               lng: event.latLng.lng(),
             },
           ]);
+          setSelectedNewMarker(
+            {
+              lat: event.latLng.lat(),
+              lng: event.latLng.lng(),
+            }
+          );
         }}
         onLoad={onMapLoad}
       >
@@ -124,10 +132,10 @@ export default function MapView() {
                   origin: new window.google.maps.Point(0, 0),
                   anchor: new window.google.maps.Point(15, 15),
                 }}
-                onClick={() => {
-                  setSelectedNewMarker(newMarker);
-                  console.log(newMarker);
-                }}
+                // onClick={() => {
+                //   setSelectedNewMarker(newMarker);
+                //   console.log(newMarker);
+                // }}
               />
             ))}
 
@@ -142,9 +150,13 @@ export default function MapView() {
                 }}
               >
                 <div>
-                  <p >
-                    Create resource
-                  </p>
+                  <button onClick={() => {
+                    history.push('/create-resource')
+                  }
+                    
+                  }>
+                    Add new resource?
+                  </button>
                 </div>
               </InfoWindow>
             ) : null}
