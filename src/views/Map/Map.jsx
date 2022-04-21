@@ -18,11 +18,11 @@ export default function MapView() {
 
   const { map } = styles;
 
-  const [libraries] = useState(['places']);
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
+  // const [libraries] = useState(['places']);
+  // const { isLoaded, loadError } = useLoadScript({
+  //   googleMapsApiKey: 'AIzaSyB_CW_olHj572sQ6AURzEjfzrFK2bhz5J8',
+  //   libraries,
+  // });
 
   const mapContainerStyle = {
     width: '100vw',
@@ -52,8 +52,8 @@ export default function MapView() {
     mapRef.current = map;
   }, []);
 
-  if (loadError) return 'Error Loading Map';
-  if (!isLoaded) return <h2>Loading...</h2>;
+  // if (loadError) return 'Error Loading Map';
+  // if (!isLoaded) return <h2>Loading...</h2>;
 
   return (
     <div className={map}>
