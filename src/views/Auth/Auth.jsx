@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
-import { useForm } from '../../hooks/useForm';
 import { signIn, signUp } from '../../services/users';
 import AuthForm from '../../components/AuthForm/AuthForm';
 
@@ -12,7 +11,7 @@ export default function Auth({ isSigningUp = false }) {
     try {
       if (isSigningUp) {
         const data = await signUp(username, password);
-        setUser({ id: data.user.id, username: data.user.username });
+        setUser({ id: data.id, username: data.username });
         history.replace('/');
       } else {
         const data = await signIn(username, password);

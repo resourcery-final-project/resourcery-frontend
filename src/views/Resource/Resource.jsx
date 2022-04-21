@@ -1,31 +1,36 @@
 import { useEffect, useState } from 'react';
 import ResourceForm from '../../components/ResourceForm/ResourceForm';
 import { useParams } from 'react-router-dom';
-import { createResource, getDetailById } from '../../services/resources';
+import {
+  createResource,
+  getDetailById,
+  updateResource,
+} from '../../services/resources';
 
 export default function Resource({ isCreating = false }) {
   const [resource, setResource] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
-  if (!isCreating) {
-    useEffect(() => {
-      async function fetchData() {
-        const data = await getDetailById(id);
-        setResource(data);
-        setLoading(false);
-      }
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getDetailById(id);
+      setResource(data);
+      setLoading(false);
+    }
+    if (!isCreating) {
       fetchData();
-    }, [id]);
-    console.log(resource);
-  }
+    } else {
+      setLoading(false);
+    }
+  }, [id]);
 
-  const handleResource = async (formState) => {
+  const handleResource = async (formState, id) => {
     try {
       if (isCreating) {
         await createResource(formState);
       } else {
-        await updateResourceById(formState);
+        await updateResource(formState, id);
       }
     } catch (error) {
       throw error;

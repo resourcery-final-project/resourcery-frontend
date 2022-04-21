@@ -53,12 +53,14 @@ export async function getDetailById(id) {
     }
   );
 
-  if (!res.ok) throw new Error('Unable to get the resource.');
+  if (!res.ok) {
+    throw new Error('Unable to get the resource.');
+  }
 
   return res.json();
 }
 
-export async function updateResource(formState) {
+export async function updateResource(formState, id) {
   const res = await fetch(
     `${process.env.REACT_APP_API_URL}/api/v1/resources/${id}`,
     {
@@ -66,9 +68,10 @@ export async function updateResource(formState) {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       mode: 'cors',
+      body: JSON.stringify(formState),
     }
   );
-
+  console.log(res);
   if (!res.ok) throw new Error('Unable to update the resource.');
 
   return res.json();
