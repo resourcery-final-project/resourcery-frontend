@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useForm } from '../../hooks/useForm';
 import styles from '../../App.module.css';
-import { Link } from 'react-router-dom';
 
 export default function AuthForm({ handleAuth, isSigningUp }) {
+  const [authError, setAuthError] = useState('');
   const { form } = styles;
   const { formState, handleFormChange } = useForm({
     username: '',
@@ -16,7 +18,7 @@ export default function AuthForm({ handleAuth, isSigningUp }) {
     try {
       await handleAuth(username, password);
     } catch (error) {
-      throw error;
+      setAuthError(error.message);
     }
   }
 
@@ -36,6 +38,8 @@ export default function AuthForm({ handleAuth, isSigningUp }) {
         value={formState.password}
         onChange={handleFormChange}
       />
+
+      {authError && <p>{authError}</p>}
 
       <button onClick={handleSubmit}>
         {isSigningUp ? 'Sign Up' : 'Sign In'}

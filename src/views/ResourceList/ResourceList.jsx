@@ -4,14 +4,18 @@ import List from '../../components/List/List';
 
 export default function ResourceList() {
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       const data = await getAllResources();
       setList(data);
+      setLoading(false);
     }
     fetchData();
   }, []);
+
+  if (loading) return <h2>Loading list of resources...</h2>;
 
   return (
     <div>

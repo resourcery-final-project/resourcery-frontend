@@ -1,10 +1,10 @@
-import { useForm } from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
 import AddressSearch from '../AddressSearch/AddressSearch';
 
-export default function ResourceForm({ handleResource, resource }) {
+export default function ResourceForm({ handleResource, resource, formError }) {
   const history = useHistory();
-  console.log(resource);
+
   const { formState, setFormState, handleFormChange } = useForm({
     latitude: resource.latitude || null,
     longitude: resource.longitude || null,
@@ -31,7 +31,6 @@ export default function ResourceForm({ handleResource, resource }) {
     (error, result) => {
       if (!error && result && result.event === 'success') {
         setFormState((prevState) => {
-          console.log(prevState);
           return { ...prevState, image: result.info.url };
         });
       }
@@ -46,7 +45,7 @@ export default function ResourceForm({ handleResource, resource }) {
         <h2>Update current Resource</h2>
       )}
       <label>
-        Title:
+        * Title:
         <input
           name="title"
           type="text"
@@ -74,7 +73,7 @@ export default function ResourceForm({ handleResource, resource }) {
       )}
 
       <label>
-        Type:
+        * Type:
         <select
           name="type"
           id="type"
@@ -90,7 +89,7 @@ export default function ResourceForm({ handleResource, resource }) {
       </label>
 
       <label>
-        Description:
+        * Description:
         <input
           name="description"
           type="text"
@@ -133,6 +132,10 @@ export default function ResourceForm({ handleResource, resource }) {
           onChange={handleFormChange}
         />
       </label>
+
+      <p>* Required fields</p>
+
+      {formError && <p>{formError}</p>}
 
       <button type="submit">Save</button>
     </form>

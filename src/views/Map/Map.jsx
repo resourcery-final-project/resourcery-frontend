@@ -1,14 +1,14 @@
+import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { getAllResources } from '../../services/resources';
+
 import { InfoWindow, useLoadScript } from '@react-google-maps/api';
-import { GoogleMap, Marker, MarkerClusterer } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
+
 import mapStyles from './mapStyles';
 import styles from './Map.css';
-import LocateButton from '../../components/LocateButton/LocateButton';
-import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { getAllResources } from '../../services/resources';
-import { Link } from 'react-router-dom';
 
 export default function MapView() {
-  const [newMarkers, setNewMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [mapCenter, setMapCenter] = useState({
     lat: 45.51223,
@@ -44,18 +44,7 @@ export default function MapView() {
     }
     fetchData();
   }, []);
-  // no dependancy in useCallback prevents rerender
-  // const onMapClick = useCallback((event) => {
-  //   //keep added markers with spread
-  //   setNewMarkers((current) => [
-  //     ...current,
-  //     {
-  //       lat: event.latLng.lat(),
-  //       lng: event.latLng.lng(),
-  //       time: new Date(),
-  //     },
-  //   ]);
-  // }, []);
+
   // make 'box' to save map instance
   const mapRef = useRef();
   // // return saved map instance on rerender
@@ -64,17 +53,15 @@ export default function MapView() {
   }, []);
 
   if (loadError) return 'Error Loading Map';
-  if (!isLoaded) return <p>Loading...</p>;
+  if (!isLoaded) return <h2>Loading...</h2>;
 
   return (
     <div className={map}>
-      {/* <LocateButton setMapCenter={setMapCenter}/> */}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={11}
         center={center}
         options={options}
-        // onClick={onMapClick}
         onLoad={onMapLoad}
       >
         {list.map((marker) => (

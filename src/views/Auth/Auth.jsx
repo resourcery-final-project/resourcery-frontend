@@ -4,7 +4,7 @@ import { signIn, signUp } from '../../services/users';
 import AuthForm from '../../components/AuthForm/AuthForm';
 
 export default function Auth({ isSigningUp = false }) {
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
   const history = useHistory();
 
   async function handleAuth(username, password) {
