@@ -1,9 +1,11 @@
 import { useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import AddressSearch from '../AddressSearch/AddressSearch';
+import styles from '../../App.module.css';
 
 export default function ResourceForm({ handleResource, resource, formError }) {
   const history = useHistory();
+  const { form } = styles;
 
   const { formState, setFormState, handleFormChange } = useForm({
     latitude: resource.latitude || null,
@@ -38,7 +40,7 @@ export default function ResourceForm({ handleResource, resource, formError }) {
   );
 
   return (
-    <form onSubmit={handleSave}>
+    <form className={form} onSubmit={handleSave}>
       {!resource ? (
         <h2>Offer a new resource</h2>
       ) : (
@@ -114,7 +116,7 @@ export default function ResourceForm({ handleResource, resource, formError }) {
 
       {!formState.address ? (
         <label>
-          Address:
+         * Address:
           <AddressSearch setFormState={setFormState} />
         </label>
       ) : (

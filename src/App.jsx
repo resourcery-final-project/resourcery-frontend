@@ -10,6 +10,7 @@ import UserProfile from './views/UserProfile/UserProfile';
 
 export default function App() {
   return (
+    <div>
     <BrowserRouter>
       <Switch>
         <Route path="/signin">
@@ -21,9 +22,9 @@ export default function App() {
         <PrivateRoute exact path="/">
           <Map />
         </PrivateRoute>
-        <PrivateRoute path="/create-resource">
+        <Route path="/create-resource">
           <Resource isCreating />
-        </PrivateRoute>
+        </Route>
         <PrivateRoute path="/update-resource/:id">
           <Resource />
         </PrivateRoute>
@@ -39,5 +40,6 @@ export default function App() {
       </Switch>
       <Header />
     </BrowserRouter>
+    </div>
   );
 }
