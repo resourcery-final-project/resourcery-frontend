@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 export default function MapView() {
   const [newMarkers, setNewMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [selectedNewMarker, setSelectedNewMarker] = useState(null)
   const [mapCenter, setMapCenter] = useState({
     lat: 45.51223,
     lng: -122.658722,
@@ -44,18 +45,7 @@ export default function MapView() {
     }
     fetchData();
   }, []);
-  // no dependancy in useCallback prevents rerender
-  // const onMapClick = useCallback((event) => {
-  //   //keep added markers with spread
-  //   setNewMarkers((current) => [
-  //     ...current,
-  //     {
-  //       lat: event.latLng.lat(),
-  //       lng: event.latLng.lng(),
-  //       time: new Date(),
-  //     },
-  //   ]);
-  // }, []);
+
   // make 'box' to save map instance
   const mapRef = useRef();
   // // return saved map instance on rerender
@@ -74,35 +64,47 @@ export default function MapView() {
         zoom={11}
         center={center}
         options={options}
-        // onClick={onMapClick}
+        onClick={(event) => {
+          //spread in current markers with new markers
+          setNewMarkers((current) => [
+            ...current,
+            {
+              lat: event.latLng.lat(),
+              lng: event.latLng.lng(),
+            },
+          ]);
+        }}
         onLoad={onMapLoad}
       >
-        {list.map((marker) => (
-          <div key={marker.id}>
-            <Marker
-              position={{
-                lat: Number(marker.latitude),
-                lng: Number(marker.longitude),
-              }}
-              icon={{
-                url: '/assets/hot-soup.png',
-                scaledSize: new window.google.maps.Size(30, 30),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(15, 15),
-              }}
-              onClick={() => {
-                setSelectedMarker(marker);
-              }}
-            />
+            {list.map((marker) => (
+              <div key={marker.id}>
+                <Marker
+                  position={{
+                    lat: Number(marker.latitude),
+                    lng: Number(marker.longitude),
+                  }}
+                  icon={{
+                    url: '/assets/hot-soup.png',
+                    scaledSize: new window.google.maps.Size(30, 30),
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(15, 15),
+                  }}
+                  onClick={() => {
+                    setSelectedMarker(marker);
+                  }}
+                />
+              </div>
+            ))}
+
             {selectedMarker ? (
               <InfoWindow
-                position={{
-                  lat: Number(selectedMarker.latitude),
-                  lng: Number(selectedMarker.longitude),
-                }}
-                onCloseClick={() => {
-                  setSelectedMarker(null);
-                }}
+              position={{
+                lat: Number(selectedMarker.latitude),
+                lng: Number(selectedMarker.longitude),
+              }}
+              onCloseClick={() => {
+                setSelectedMarker(null);
+              }}
               >
                 <div>
                   <Link to={`/resource/${selectedMarker.id}`}>
@@ -111,8 +113,42 @@ export default function MapView() {
                 </div>
               </InfoWindow>
             ) : null}
-          </div>
-        ))}
+
+            {newMarkers.map((newMarker) => (
+              <Marker 
+                key={newMarker.lat}
+                position={{ lat: newMarker.lat, lng: newMarker.lng }}
+                icon={{
+                  url: '/assets/hot-soup.png',
+                  scaledSize: new window.google.maps.Size(30, 30),
+                  origin: new window.google.maps.Point(0, 0),
+                  anchor: new window.google.maps.Point(15, 15),
+                }}
+                onClick={() => {
+                  setSelectedNewMarker(newMarker);
+                  console.log(newMarker);
+                }}
+              />
+            ))}
+
+            {selectedNewMarker ? (
+              <InfoWindow
+                position={{
+                  lat: selectedNewMarker.lat,
+                  lng: selectedNewMarker.lng,
+                }}
+                onCloseClick={() => {
+                  setSelectedNewMarker(null);
+                }}
+              >
+                <div>
+                  <p >
+                    Create resource
+                  </p>
+                </div>
+              </InfoWindow>
+            ) : null}
+    
       </GoogleMap>
     </div>
   );
