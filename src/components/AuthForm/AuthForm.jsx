@@ -1,7 +1,7 @@
-import { useForm } from '../../hooks/useForm';
-import styles from '../../App.module.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useForm } from '../../hooks/useForm';
+import styles from '../../App.module.css';
 
 export default function AuthForm({ handleAuth, isSigningUp }) {
   const [authError, setAuthError] = useState('');

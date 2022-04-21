@@ -26,8 +26,6 @@ export default function AddressSearch({ setFormState }) {
     },
   });
 
-  const handleAddressChange = async (address) => {};
-
   return (
     <div className="search">
       <Combobox
@@ -35,15 +33,12 @@ export default function AddressSearch({ setFormState }) {
           try {
             const results = await getGeocode({ address });
             const { lat, lng } = await getLatLng(results[0]);
-            console.log({ lat, lng });
             setFormState((prevState) => {
               return { ...prevState, latitude: lat, longitude: lng, address };
             });
-            console.log(formState);
           } catch (error) {
-            console.log('error');
+            throw error;
           }
-          console.log(address);
           setValue(address);
         }}
       >
