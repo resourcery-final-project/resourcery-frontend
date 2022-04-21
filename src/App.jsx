@@ -22,9 +22,9 @@ export default function App() {
         <PrivateRoute exact path="/">
           <Map />
         </PrivateRoute>
-        <Route path="/create-resource">
+        <PrivateRoute path="/create-resource">
           <Resource isCreating />
-        </Route>
+        </PrivateRoute>
         <PrivateRoute path="/update-resource/:id">
           <Resource />
         </PrivateRoute>
