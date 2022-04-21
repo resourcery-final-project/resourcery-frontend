@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { signOut } from '../../services/users';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -52,7 +53,14 @@ export default function Header() {
         <hr />
         <MenuItem onClick={handleClose}>About Us</MenuItem>
         <hr />
-        <MenuItem onClick={handleClose}>Log Out</MenuItem>
+        <MenuItem
+          onClick={async () => {
+            console.log('click');
+            await signOut();
+          }}
+        >
+          Log Out
+        </MenuItem>
         <hr />
       </Menu>
     </header>
