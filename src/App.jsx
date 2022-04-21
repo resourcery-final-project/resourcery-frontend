@@ -7,8 +7,11 @@ import Resource from './views/Resource/Resource';
 import ResourceDetail from './views/ResourceDetail/ResourceDetail';
 import List from './views/ResourceList/ResourceList';
 import UserProfile from './views/UserProfile/UserProfile';
+import { useUser } from './context/UserContext';
 
 export default function App() {
+  const { user } = useUser();
+
   return (
     <BrowserRouter>
       <Switch>
@@ -37,7 +40,7 @@ export default function App() {
           <List />
         </PrivateRoute>
       </Switch>
-      <Header />
+      {user.username && <Header />}
     </BrowserRouter>
   );
 }

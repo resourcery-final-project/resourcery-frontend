@@ -15,21 +15,38 @@ export default function ResourceList() {
     fetchData();
   }, []);
 
+  const handleFilter = (value) => {
+    const newList = list.filter((item) => item.type === value);
+    console.log(newList);
+  };
+
   if (loading) return <h2>Loading list of resources...</h2>;
 
   return (
     <div>
       <div>
         <label>
-          <input type="checkbox" />
+          <input
+            value="Food Box"
+            type="checkbox"
+            onChange={(e) => handleFilter(e.target.value)}
+          />
           Food Box
         </label>
         <label>
-          <input type="checkbox" />
+          <input
+            value="Ready to Eat"
+            type="checkbox"
+            onChange={(e) => handleFilter(e.target.value)}
+          />
           Ready to Eat
         </label>
         <label>
-          <input type="checkbox" />
+          <input
+            value="Fruit Trees"
+            type="checkbox"
+            onChange={(e) => handleFilter(e.target.value)}
+          />
           Fruit Trees
         </label>
       </div>
