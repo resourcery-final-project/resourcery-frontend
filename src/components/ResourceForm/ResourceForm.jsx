@@ -5,7 +5,7 @@ import styles from '../../App.module.css';
 
 export default function ResourceForm({ handleResource, resource, formError }) {
   const history = useHistory();
-  const { form } = styles;
+  const { form, img } = styles;
 
   const { formState, setFormState, handleFormChange } = useForm({
     latitude: resource.latitude || null,
@@ -70,7 +70,7 @@ export default function ResourceForm({ handleResource, resource, formError }) {
         </button>
       ) : (
         <>
-          <img src={formState.image} />
+          <img className={img} src={formState.image} />
         </>
       )}
 
