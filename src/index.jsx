@@ -1,13 +1,13 @@
 import { render } from 'react-dom';import App from './App';
 import { UserProvider } from './context/UserContext';
-import { MarkerProvider } from './context/MarkerContext';
+// import { MarkerProvider } from './context/MarkerContext';
 
 render(
   <React.StrictMode>
     <UserProvider>
-      <MarkerProvider>
+      {/* <MarkerProvider> */}
         <App />
-      </MarkerProvider>
+      {/* </MarkerProvider> */}
     </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
