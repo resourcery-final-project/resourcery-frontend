@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Detail from '../../components/Detail/Detail';
-import { getDetailById } from '../../services/resources';
+import { getDetailById, deleteById } from '../../services/resources';
 
 export default function ResourceDetail() {
   const { id } = useParams();
+  const history = useHistory();
   const [detail, setDetail] = useState({});
 
   useEffect(() => {
@@ -18,6 +20,8 @@ export default function ResourceDetail() {
   const handleDelete = async (id) => {
     try {
       await deleteById(id);
+      confirm('Are you sure you want to delete?');
+      history.replace('/user');
     } catch (error) {
       throw error;
     }

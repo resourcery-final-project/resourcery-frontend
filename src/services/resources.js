@@ -68,6 +68,7 @@ export async function updateResource(formState, id) {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       mode: 'cors',
+      body: JSON.stringify(formState),
     }
   );
   console.log(res);

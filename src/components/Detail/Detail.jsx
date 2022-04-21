@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 
-export default function Detail({ detail }) {
+export default function Detail({ detail, handleDelete }) {
   const { user } = useUser();
   const history = useHistory();
 
@@ -17,7 +17,13 @@ export default function Detail({ detail }) {
           <button onClick={() => history.push(`/update-resource/${detail.id}`)}>
             Edit
           </button>
-          <button>Delete</button>
+          <button
+            onClick={() => {
+              handleDelete(detail.id);
+            }}
+          >
+            Delete
+          </button>
         </>
       )}
     </div>
