@@ -53,7 +53,7 @@ export default function MapView() {
   }, []);
 
   if (loadError) return 'Error Loading Map';
-  if (!isLoaded) return <p>Loading...</p>;
+  if (!isLoaded) return <h2>Loading...</h2>;
 
   return (
     <div className={map}>

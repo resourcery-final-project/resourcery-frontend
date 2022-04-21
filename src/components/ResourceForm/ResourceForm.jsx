@@ -2,7 +2,7 @@ import { useForm } from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom';
 import AddressSearch from '../AddressSearch/AddressSearch';
 
-export default function ResourceForm({ handleResource, resource }) {
+export default function ResourceForm({ handleResource, resource, formError }) {
   const history = useHistory();
   console.log(resource);
   const { formState, setFormState, handleFormChange } = useForm({
@@ -46,7 +46,7 @@ export default function ResourceForm({ handleResource, resource }) {
         <h2>Update current Resource</h2>
       )}
       <label>
-        Title:
+        * Title:
         <input
           name="title"
           type="text"
@@ -74,7 +74,7 @@ export default function ResourceForm({ handleResource, resource }) {
       )}
 
       <label>
-        Type:
+        * Type:
         <select
           name="type"
           id="type"
@@ -90,7 +90,7 @@ export default function ResourceForm({ handleResource, resource }) {
       </label>
 
       <label>
-        Description:
+        * Description:
         <input
           name="description"
           type="text"
@@ -133,6 +133,10 @@ export default function ResourceForm({ handleResource, resource }) {
           onChange={handleFormChange}
         />
       </label>
+
+      <p>* Required fields</p>
+
+      {formError && <p>{formError}</p>}
 
       <button type="submit">Save</button>
     </form>
