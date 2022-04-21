@@ -18,25 +18,40 @@ export default function ResourceList() {
     fetchData();
   }, []);
 
+  const handleFilter = (value) => {
+    const newList = list.filter((item) => item.type === value);
+    console.log(newList);
+  };
+
   if (loading) return <h2>Loading list of resources...</h2>;
 
   return (
-      <>
-      <div className={filter}>
-      <label>
-        <input type="checkbox" />
-        Food Box
-      </label>
-      <label>
-        <input type="checkbox" />
-        Ready to Eat
-      </label>
-      <label>
-        <input type="checkbox" />
-        Fruit Trees
-      </label>
-    </div><div className={listview}>
-        <List list={list} />
+    <div>
+      <div>
+        <label>
+          <input
+            value="Food Box"
+            type="checkbox"
+            onChange={(e) => handleFilter(e.target.value)}
+          />
+          Food Box
+        </label>
+        <label>
+          <input
+            value="Ready to Eat"
+            type="checkbox"
+            onChange={(e) => handleFilter(e.target.value)}
+          />
+          Ready to Eat
+        </label>
+        <label>
+          <input
+            value="Fruit Trees"
+            type="checkbox"
+            onChange={(e) => handleFilter(e.target.value)}
+          />
+          Fruit Trees
+        </label>
       </div>
       </>
   );
