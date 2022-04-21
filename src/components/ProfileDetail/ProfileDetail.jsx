@@ -1,12 +1,14 @@
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 
 export default function ProfileDetail({ profileList }) {
   const history = useHistory();
+  const { user } = useUser();
 
   return (
     <div>
-      <h1>UserName</h1>
+      <h1>{user.username}</h1>
       <button
         onClick={() => {
           history.push('/create-resource');

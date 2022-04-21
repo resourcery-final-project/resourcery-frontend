@@ -12,18 +12,18 @@ export default function Resource({ isCreating = false }) {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
-  if (!isCreating) {
-    useEffect(() => {
-      async function fetchData() {
-        const data = await getDetailById(id);
-        setResource(data);
-        setLoading(false);
-      }
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getDetailById(id);
+      setResource(data);
+      setLoading(false);
+    }
+    if (!isCreating) {
       fetchData();
-    }, [id]);
-  } else {
-    setLoading(false);
-  }
+    } else {
+      setLoading(false);
+    }
+  }, [id]);
 
   const handleResource = async (formState, id) => {
     try {

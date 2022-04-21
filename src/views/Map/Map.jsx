@@ -97,8 +97,8 @@ export default function MapView() {
             {selectedMarker ? (
               <InfoWindow
                 position={{
-                  lat: Number(selectedMarker.lat),
-                  lng: Number(selectedMarker.lng),
+                  lat: Number(selectedMarker.latitude),
+                  lng: Number(selectedMarker.longitude),
                 }}
                 onCloseClick={() => {
                   setSelectedMarker(null);

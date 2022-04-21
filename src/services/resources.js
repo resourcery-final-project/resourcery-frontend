@@ -53,7 +53,9 @@ export async function getDetailById(id) {
     }
   );
 
-  if (!res.ok) throw new Error('Unable to get the resource.');
+  if (!res.ok) {
+    throw new Error('Unable to get the resource.');
+  }
 
   return res.json();
 }
