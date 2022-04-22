@@ -4,10 +4,11 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './Header.css';
+import { useHistory } from 'react-router-dom';
 
 export default function Header() {
   const { nav_burger, nav_button } = styles;
-
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -53,8 +54,8 @@ export default function Header() {
         <hr />
         <MenuItem
           onClick={async () => {
-            console.log('click');
             await signOut();
+            history.replace('/signin');
           }}
         >
           Log Out
