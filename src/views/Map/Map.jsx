@@ -10,6 +10,7 @@ import { useMarkerCoords } from '../../context/MarkerContext';
 export default function MapView() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [selectedNewMarker, setSelectedNewMarker] = useState(null)
+  const [newMarkers, setNewMarkers] = useState([]);
   const [mapCenter, setMapCenter] = useState({
     lat: 45.51223,
     lng: -122.658722,
