@@ -1,8 +1,8 @@
-import { InfoWindow, useLoadScript } from '@react-google-maps/api';
-import { GoogleMap, Marker, MarkerClusterer } from '@react-google-maps/api';
+import { InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
 import styles from './Map.css';
-import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { getAllResources } from '../../services/resources';
 import { Link, useHistory } from 'react-router-dom';
 import { useMarkerCoords } from '../../context/MarkerContext';
@@ -19,14 +19,7 @@ export default function MapView() {
   const { setMarkerCoords } = useMarkerCoords();
   const history = useHistory();
 
-
   const { map } = styles;
-
-  const [libraries] = useState(['places']);
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
 
   const mapContainerStyle = {
     width: '100vw',
@@ -52,12 +45,9 @@ export default function MapView() {
   // make 'box' to save map instance
   const mapRef = useRef();
   // // return saved map instance on rerender
-  const onMapLoad = useCallback((map) => {
+  const onMapLoad = useMemo((map) => {
     mapRef.current = map;
   }, []);
-
-  if (loadError) return 'Error Loading Map';
-  if (!isLoaded) return <p>Loading...</p>;
 
   return (
     <div className={map}>
@@ -142,10 +132,6 @@ export default function MapView() {
                   origin: new window.google.maps.Point(0, 0),
                   anchor: new window.google.maps.Point(15, 15),
                 }}
-                // onClick={() => {
-                //   setSelectedNewMarker(newMarker);
-                //   console.log(newMarker);
-                // }}
               />
             ))}
 
@@ -171,7 +157,6 @@ export default function MapView() {
                 </div>
               </InfoWindow>
             ) : null}
-    
       </GoogleMap>
     </div>
   );
