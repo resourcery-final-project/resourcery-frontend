@@ -5,6 +5,7 @@ import styles from './Map.css';
 import { useCallback, useMemo, useRef, useState, useEffect } from 'react';
 import { getAllResources } from '../../services/resources';
 import { Link, useHistory } from 'react-router-dom';
+import { useMarkerCoords } from '../../context/MarkerContext';
 
 export default function MapView() {
   const [newMarkers, setNewMarkers] = useState([]);
@@ -15,6 +16,7 @@ export default function MapView() {
     lng: -122.658722,
   });
   const [list, setList] = useState([]);
+  const { markerCoords, setMarkerCoords } = useMarkerCoords();
   const history = useHistory();
 
 
@@ -77,6 +79,11 @@ export default function MapView() {
               lat: event.latLng.lat(),
               lng: event.latLng.lng(),
             },
+          ]);
+          setMarkerCoords([            {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            }
           ]);
           setSelectedNewMarker(
             {

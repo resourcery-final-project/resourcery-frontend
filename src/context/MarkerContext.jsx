@@ -5,7 +5,7 @@ const MarkerContext = createContext();
 export const MarkerProvider = ({ children }) => {
     const [markerCoords, setMarkerCoords] = useState([]);
     const value = {markerCoords, setMarkerCoords};
-    return <MarkerContext.Provider value={value}></MarkerContext.Provider>
+    return <MarkerContext.Provider value={value}>{children}</MarkerContext.Provider>
 }
 
 export const useMarkerCoords = () => {
