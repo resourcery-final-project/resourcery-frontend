@@ -19,7 +19,7 @@ export default function ProfileDetail({ profileList }) {
         Add New Resource
       </button>
 
-      {profileList ? (
+      {profileList[0] ? (
         <ul className={profilelist}>
           {profileList.map((item) => (
             <li key={item.id}>
