@@ -5,6 +5,7 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchData() {
@@ -14,11 +15,12 @@ export function UserProvider({ children }) {
           ? { id: currentUser.id, username: currentUser.username }
           : {}
       );
+      setLoading(false);
     }
     fetchData();
   }, []);
 
-  const userValues = { user, setUser };
+  const userValues = { user, setUser, loading };
 
   return (
     <UserContext.Provider value={userValues}>{children}</UserContext.Provider>

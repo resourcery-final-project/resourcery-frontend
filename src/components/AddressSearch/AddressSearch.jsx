@@ -26,8 +26,6 @@ export default function AddressSearch({ setFormState }) {
     },
   });
 
-  const handleAddressChange = async (address) => {};
-
   return (
     <div className="search">
       <Combobox

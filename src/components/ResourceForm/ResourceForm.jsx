@@ -1,12 +1,13 @@
-import { useForm } from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
 import AddressSearch from '../AddressSearch/AddressSearch';
 import { useMarkerCoords } from '../../context/MarkerContext';
+import styles from '../../App.module.css';
 
-export default function ResourceForm({ handleResource, resource }) {
+export default function ResourceForm({ handleResource, resource, formError }) {
   const history = useHistory();
   const {markerCoords} = useMarkerCoords();
-  console.log(markerCoords);
+  const { form, img } = styles;
 
   const { formState, setFormState, handleFormChange } = useForm({
     latitude: resource.latitude || markerCoords.lat || null,
@@ -35,7 +36,6 @@ export default function ResourceForm({ handleResource, resource }) {
     (error, result) => {
       if (!error && result && result.event === 'success') {
         setFormState((prevState) => {
-          console.log(prevState);
           return { ...prevState, image: result.info.url };
         });
       }
@@ -43,14 +43,14 @@ export default function ResourceForm({ handleResource, resource }) {
   );
 
   return (
-    <form onSubmit={handleSave}>
+    <form className={form} onSubmit={handleSave}>
       {!resource ? (
         <h2>Offer a new resource</h2>
       ) : (
         <h2>Update current Resource</h2>
       )}
       <label>
-        Title:
+        * Title:
         <input
           name="title"
           type="text"
@@ -73,12 +73,12 @@ export default function ResourceForm({ handleResource, resource }) {
         </button>
       ) : (
         <>
-          <img src={formState.image} />
+          <img className={img} src={formState.image} />
         </>
       )}
 
       <label>
-        Type:
+        * Type:
         <select
           name="type"
           id="type"
@@ -94,7 +94,7 @@ export default function ResourceForm({ handleResource, resource }) {
       </label>
 
       <label>
-        Description:
+        * Description:
         <input
           name="description"
           type="text"
@@ -119,7 +119,7 @@ export default function ResourceForm({ handleResource, resource }) {
 
       {!formState.address && !markerCoords.lat ? (
         <label>
-          Address:
+         * Address:
           <AddressSearch setFormState={setFormState} />
         </label>
       ) : (
@@ -137,6 +137,10 @@ export default function ResourceForm({ handleResource, resource }) {
           onChange={handleFormChange}
         />
       </label>
+
+      <p>* Required fields</p>
+
+      {formError && <p>{formError}</p>}
 
       <button type="submit">Save</button>
     </form>

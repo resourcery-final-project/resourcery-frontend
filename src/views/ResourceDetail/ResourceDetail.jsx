@@ -5,14 +5,16 @@ import Detail from '../../components/Detail/Detail';
 import { getDetailById, deleteById } from '../../services/resources';
 
 export default function ResourceDetail() {
+  const [detail, setDetail] = useState({});
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const history = useHistory();
-  const [detail, setDetail] = useState({});
 
   useEffect(() => {
     async function fetchData() {
       const data = await getDetailById(id);
       setDetail(data);
+      setLoading(false);
     }
     fetchData();
   }, []);
@@ -27,6 +29,8 @@ export default function ResourceDetail() {
       throw error;
     }
   };
+
+  if (loading) return <h2>Loading Resource...</h2>;
 
   return (
     <div>

@@ -1,4 +1,5 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Header from './components/Header/Header';
 import Auth from './views/Auth/Auth';
 import Map from './views/Map/Map';
@@ -6,9 +7,13 @@ import Resource from './views/Resource/Resource';
 import ResourceDetail from './views/ResourceDetail/ResourceDetail';
 import List from './views/ResourceList/ResourceList';
 import UserProfile from './views/UserProfile/UserProfile';
+import { useUser } from './context/UserContext';
 
 export default function App() {
+  const { user } = useUser();
+
   return (
+    <div>
     <BrowserRouter>
       <Switch>
         <Route path="/signin">
@@ -17,26 +22,27 @@ export default function App() {
         <Route path="/signup">
           <Auth isSigningUp />
         </Route>
-        <Route exact path="/">
+        <PrivateRoute exact path="/">
           <Map />
-        </Route>
-        <Route path="/create-resource">
+        </PrivateRoute>
+        <PrivateRoute path="/create-resource">
           <Resource isCreating />
-        </Route>
-        <Route path="/update-resource/:id">
+        </PrivateRoute>
+        <PrivateRoute path="/update-resource/:id">
           <Resource />
-        </Route>
-        <Route path="/resource/:id">
+        </PrivateRoute>
+        <PrivateRoute path="/resource/:id">
           <ResourceDetail />
-        </Route>
-        <Route path="/user">
+        </PrivateRoute>
+        <PrivateRoute path="/user">
           <UserProfile />
-        </Route>
-        <Route path="/list">
+        </PrivateRoute>
+        <PrivateRoute path="/list">
           <List />
-        </Route>
+        </PrivateRoute>
       </Switch>
-      <Header />
+      {user.username && <Header />}
     </BrowserRouter>
+    </div>
   );
 }

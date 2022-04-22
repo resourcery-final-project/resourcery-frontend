@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import ResourceForm from '../../components/ResourceForm/ResourceForm';
 import { useParams } from 'react-router-dom';
 import {
   createResource,
   getDetailById,
   updateResource,
 } from '../../services/resources';
+import ResourceForm from '../../components/ResourceForm/ResourceForm';
 
 export default function Resource({ isCreating = false }) {
   const [resource, setResource] = useState({});
   const [loading, setLoading] = useState(true);
+  const [formError, setFormError] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
@@ -33,18 +34,18 @@ export default function Resource({ isCreating = false }) {
         await updateResource(formState, id);
       }
     } catch (error) {
-      throw error;
+      setFormError(error.message);
     }
   };
 
-  if (loading) return <h1>Loading Resource...</h1>;
+  if (loading) return <h2>Loading Resource...</h2>;
 
   return (
     <div>
       <ResourceForm
-        isCreating={isCreating}
         handleResource={handleResource}
         resource={resource}
+        formError={formError}
       />
     </div>
   );

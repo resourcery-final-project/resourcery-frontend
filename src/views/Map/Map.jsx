@@ -8,7 +8,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { useMarkerCoords } from '../../context/MarkerContext';
 
 export default function MapView() {
-  const [newMarkers, setNewMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [selectedNewMarker, setSelectedNewMarker] = useState(null)
   const [mapCenter, setMapCenter] = useState({
@@ -51,7 +50,6 @@ export default function MapView() {
 
   return (
     <div className={map}>
-      {/* <LocateButton setMapCenter={setMapCenter}/> */}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={11}

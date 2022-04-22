@@ -20,3 +20,16 @@ h1 {
     margin-top: 9px;
     margin-left: 6vw;
 }
+
+.nav_burger {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    color: #B7B7A4;
+}
+
+.nav_button {
+    height: 10vh;
+}

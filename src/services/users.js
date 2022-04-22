@@ -1,8 +1,11 @@
 export async function getUser() {
   try {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/current`, {
-      credentials: 'include',
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/v1/users/current`,
+      {
+        credentials: 'include',
+      }
+    );
     return res.json();
   } catch (error) {
     return null;
@@ -10,13 +13,16 @@ export async function getUser() {
 }
 
 export async function signIn(username, password) {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/session`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    mode: 'cors',
-    body: JSON.stringify({ username, password }),
-  });
+  const res = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/v1/users/session`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      mode: 'cors',
+      body: JSON.stringify({ username, password }),
+    }
+  );
 
   if (!res.ok) throw new Error('Invalid username/password');
 
@@ -38,11 +44,16 @@ export async function signUp(username, password) {
 }
 
 export async function signOut() {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users`, {
-    method: 'DELETE',
-    credentials: 'include',
-    mode: 'cors',
-  });
+  const res = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/v1/users/session`,
+    {
+      method: 'DELETE',
+      credentials: 'include',
+      mode: 'cors',
+    }
+  );
+
+  if (!res.ok) throw new Error('Unable to sign out.');
 
   return res.ok;
 }
