@@ -6,10 +6,10 @@ import styles from '../../App.module.css';
 export default function ProfileDetail({ profileList }) {
   const history = useHistory();
   const { user } = useUser();
-  const { listview, img } = styles;
+  const { listview, img, profileview } = styles;
 
   return (
-    <div>
+    <div className={profileview}>
       <h1>{user.username}</h1>
       <button
         onClick={() => {

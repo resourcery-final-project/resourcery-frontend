@@ -7,7 +7,7 @@ import styles from './Header.css';
 import { useHistory } from 'react-router-dom';
 
 export default function Header() {
-  const { nav_burger, nav_button } = styles;
+  const { nav_burger, nav_button, headerheader } = styles;
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header>
-      <h1>resourcery</h1>
+      <h1 className={headerheader}>resourcery</h1>
       <Button
         className={nav_button}
         id="basic-button"

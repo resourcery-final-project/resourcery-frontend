@@ -7,7 +7,7 @@ import styles from '../../App.module.css';
 export default function ResourceForm({ handleResource, resource, formError }) {
   const history = useHistory();
   const {markerCoords} = useMarkerCoords();
-  const { form, img } = styles;
+  const { form, img, resourceform } = styles;
 
   const { formState, setFormState, handleFormChange } = useForm({
     latitude: resource.latitude || markerCoords.lat || null,
@@ -23,7 +23,6 @@ export default function ResourceForm({ handleResource, resource, formError }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    console.log(formState);
     await handleResource(formState, resource.id);
     history.replace('/user');
   };
@@ -43,12 +42,13 @@ export default function ResourceForm({ handleResource, resource, formError }) {
   );
 
   return (
-    <form className={form} onSubmit={handleSave}>
+    <div className={resourceform}>
       {!resource ? (
         <h2>Offer a new resource</h2>
       ) : (
         <h2>Update current Resource</h2>
       )}
+    <form className={form} onSubmit={handleSave}>
       <label>
         * Title:
         <input
@@ -144,5 +144,6 @@ export default function ResourceForm({ handleResource, resource, formError }) {
 
       <button type="submit">Save</button>
     </form>
+    </div>
   );
 }

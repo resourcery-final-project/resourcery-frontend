@@ -71,7 +71,6 @@ export async function updateResource(formState, id) {
       body: JSON.stringify(formState),
     }
   );
-  console.log(res);
   if (!res.ok) throw new Error('Unable to update the resource.');
 
   return res.json();

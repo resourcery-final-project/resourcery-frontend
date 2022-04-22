@@ -57,10 +57,6 @@ export default function MapView() {
         center={center}
         options={options}
         onClick={(event) => {
-          console.log(            {
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-          });
           //spread in current markers with new markers
           setNewMarkers((current) => [
             ...current,
@@ -117,6 +113,7 @@ export default function MapView() {
                   <Link to={`/resource/${selectedMarker.id}`}>
                     {selectedMarker.title}
                   </Link>
+                  <p>{selectedMarker.type}</p>
                 </div>
               </InfoWindow>
             ) : null}
