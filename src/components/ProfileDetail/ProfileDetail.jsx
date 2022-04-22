@@ -6,7 +6,7 @@ import styles from '../../App.module.css';
 export default function ProfileDetail({ profileList }) {
   const history = useHistory();
   const { user } = useUser();
-  const { listview, img, profileview } = styles;
+  const { profilelist, img, profileview } = styles;
 
   return (
     <div className={profileview}>
@@ -20,7 +20,7 @@ export default function ProfileDetail({ profileList }) {
       </button>
 
       {profileList ? (
-        <ul className={listview}>
+        <ul className={profilelist}>
           {profileList.map((item) => (
             <li key={item.id}>
               {item.image && (

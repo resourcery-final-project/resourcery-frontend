@@ -33,3 +33,8 @@ header {
 .nav_button {
     height: 10vh;
 }
+
+.header {
+    font-family: 'Josefin Slab', serif;
+    margin: 3vw;
+}
