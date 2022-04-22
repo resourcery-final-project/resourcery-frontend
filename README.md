@@ -14,9 +14,11 @@ Spencer Eagleton - Vancouver, WA
 
 ## Resource Table
 
+
 | ID     | UserID | latitude | longitude | type | description | image | address |
 | ------ | ------ | -------- | --------- | ---- | ----------- | ----- | ------- |
 | bigint | bigint | dec      | dec       | text | text        | text  | text    |
+
 
 ## User Table
 

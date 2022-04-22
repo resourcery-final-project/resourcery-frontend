@@ -37,7 +37,7 @@ export default function AddressSearch({ setFormState }) {
               return { ...prevState, latitude: lat, longitude: lng, address };
             });
           } catch (error) {
-            throw error;
+            throw(error);
           }
           setValue(address);
         }}
