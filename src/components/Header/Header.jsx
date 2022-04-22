@@ -7,7 +7,7 @@ import styles from './Header.css';
 import { useHistory } from 'react-router-dom';
 
 export default function Header() {
-  const { nav_burger, nav_button } = styles;
+  const { nav_burger, nav_button, headerheader, header } = styles;
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <header>
-      <h1>resourcery</h1>
+      <h1 className={headerheader}>resourcery</h1>
       <Button
         className={nav_button}
         id="basic-button"
@@ -41,26 +41,25 @@ export default function Header() {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <NavLink to="/">Home</NavLink>
+          <NavLink className={header} to="/">Home</NavLink>
         </MenuItem>
         <hr />
         <MenuItem onClick={handleClose}>
-          <NavLink to="/list">Resource List</NavLink>
+          <NavLink className={header} to="/list">Resource List</NavLink>
         </MenuItem>
         <hr />
         <MenuItem onClick={handleClose}>
-          <NavLink to="/user">My Profile</NavLink>
+          <NavLink className={header} to="/user">My Profile</NavLink>
         </MenuItem>
         <hr />
-        <MenuItem
+        <MenuItem  
           onClick={async () => {
             await signOut();
             history.replace('/signin');
           }}
         >
-          Log Out
+          <h4 className={header}>Log Out</h4>
         </MenuItem>
-        <hr />
       </Menu>
     </header>
   );

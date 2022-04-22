@@ -13,7 +13,7 @@ header {
     
 }
 
-h1 {
+.headerheader {
     display: flex;
     font-family: 'Josefin Slab', serif;
     font-size: 6vh;
@@ -32,4 +32,9 @@ h1 {
 
 .nav_button {
     height: 10vh;
+}
+
+.header {
+    font-family: 'Josefin Slab', serif;
+    margin: 3vw;
 }

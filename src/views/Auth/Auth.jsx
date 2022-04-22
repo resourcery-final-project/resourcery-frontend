@@ -2,11 +2,13 @@ import { useHistory } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import { signIn, signUp } from '../../services/users';
 import AuthForm from '../../components/AuthForm/AuthForm';
-import { Alert } from '@mui/material';
+import styles from '../../App.module.css';
+
 
 export default function Auth({ isSigningUp = false }) {
   const { setUser } = useUser();
   const history = useHistory();
+  const { title, titleimage } = styles;
 
   async function handleAuth(username, password) {
     try {
@@ -28,7 +30,10 @@ export default function Auth({ isSigningUp = false }) {
 
   return (
     <div>
-      <h1>resourcery</h1>
+      <div className={title}>
+        <img className={titleimage} src='/assets/resourcery-logo.png' />
+        <h1>resourcery</h1>
+      </div>
       <AuthForm handleAuth={handleAuth} isSigningUp={isSigningUp} />
     </div>
   );
