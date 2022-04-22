@@ -16,7 +16,7 @@ export default function MapView() {
     lng: -122.658722,
   });
   const [list, setList] = useState([]);
-  const { markerCoords, setMarkerCoords } = useMarkerCoords();
+  const { setMarkerCoords } = useMarkerCoords();
   const history = useHistory();
 
 
@@ -80,11 +80,11 @@ export default function MapView() {
               lng: event.latLng.lng(),
             },
           ]);
-          setMarkerCoords([            {
+          setMarkerCoords({
             lat: event.latLng.lat(),
             lng: event.latLng.lng(),
             }
-          ]);
+          );
           setSelectedNewMarker(
             {
               lat: event.latLng.lat(),

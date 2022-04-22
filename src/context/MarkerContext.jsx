@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const MarkerContext = createContext();
 
 export const MarkerProvider = ({ children }) => {
-    const [markerCoords, setMarkerCoords] = useState([]);
+    const [markerCoords, setMarkerCoords] = useState({});
     const value = {markerCoords, setMarkerCoords};
     return <MarkerContext.Provider value={value}>{children}</MarkerContext.Provider>
 }
