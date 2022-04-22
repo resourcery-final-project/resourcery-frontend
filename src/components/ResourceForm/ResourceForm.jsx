@@ -1,15 +1,17 @@
 import { useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import AddressSearch from '../AddressSearch/AddressSearch';
+import { useMarkerCoords } from '../../context/MarkerContext';
 import styles from '../../App.module.css';
 
 export default function ResourceForm({ handleResource, resource, formError }) {
   const history = useHistory();
+  const {markerCoords} = useMarkerCoords();
   const { form, img } = styles;
 
   const { formState, setFormState, handleFormChange } = useForm({
-    latitude: resource.latitude || null,
-    longitude: resource.longitude || null,
+    latitude: resource.latitude || markerCoords.lat || null,
+    longitude: resource.longitude || markerCoords.lng || null,
     type: resource.type || '',
     description: resource.description || '',
     image: resource.image || '',
@@ -21,6 +23,7 @@ export default function ResourceForm({ handleResource, resource, formError }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    console.log(formState);
     await handleResource(formState, resource.id);
     history.replace('/user');
   };
@@ -114,7 +117,7 @@ export default function ResourceForm({ handleResource, resource, formError }) {
         />
       </label>
 
-      {!formState.address ? (
+      {!formState.address && !markerCoords.lat ? (
         <label>
          * Address:
           <AddressSearch setFormState={setFormState} />
