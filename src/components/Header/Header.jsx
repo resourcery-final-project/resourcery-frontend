@@ -40,19 +40,34 @@ export default function Header() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>
-          <NavLink className={header} to="/">Home</NavLink>
+        <MenuItem
+          onClick={() => {
+            history.push('/');
+            setAnchorEl(null);
+          }}
+        >
+          <h4 className={header}>Home</h4>
         </MenuItem>
         <hr />
-        <MenuItem onClick={handleClose}>
-          <NavLink className={header} to="/list">Resource List</NavLink>
+        <MenuItem
+          onClick={() => {
+            history.push('/list');
+            setAnchorEl(null);
+          }}
+        >
+          <h4 className={header}>Resource List</h4>
         </MenuItem>
         <hr />
-        <MenuItem onClick={handleClose}>
-          <NavLink className={header} to="/user">My Profile</NavLink>
+        <MenuItem
+          onClick={() => {
+            history.push('/user');
+            setAnchorEl(null);
+          }}
+        >
+          <h4 className={header}>My Profile</h4>
         </MenuItem>
         <hr />
-        <MenuItem  
+        <MenuItem
           onClick={async () => {
             await signOut();
             location.replace('/signin');
