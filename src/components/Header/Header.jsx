@@ -55,7 +55,7 @@ export default function Header() {
         <MenuItem  
           onClick={async () => {
             await signOut();
-            history.replace('/signin');
+            location.replace('/signin');
           }}
         >
           <h4 className={header}>Log Out</h4>
