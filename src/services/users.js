@@ -38,7 +38,8 @@ export async function signUp(username, password) {
     body: JSON.stringify({ username, password }),
   });
 
-  if (!res.ok) throw new Error('Invalid username/password');
+  if (!res.ok)
+    throw new Error('This username is taken, please choose another.');
 
   return res.json();
 }
