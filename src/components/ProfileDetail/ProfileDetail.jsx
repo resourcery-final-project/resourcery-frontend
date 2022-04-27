@@ -6,7 +6,7 @@ import styles from '../../App.module.css';
 export default function ProfileDetail({ profileList }) {
   const history = useHistory();
   const { user } = useUser();
-  const { profilelist, img, profileview } = styles;
+  const { profilelist, img, profileview, link } = styles;
 
   return (
     <div className={profileview}>
@@ -22,15 +22,15 @@ export default function ProfileDetail({ profileList }) {
       {profileList[0] ? (
         <ul className={profilelist}>
           {profileList.map((item) => (
-            <li key={item.id}>
+            <><li key={item.id}>
               {item.image && (
                 <img className={img} src={item.image} alt={item.title} />
               )}
               <h3>
-                <Link to={`/resource/${item.id}`}>{item.title}</Link>
+                <Link className={link} to={`/resource/${item.id}`}>{item.title}</Link>
               </h3>
               <h4>{item.description}</h4>
-            </li>
+            </li><hr /></>
           ))}
         </ul>
       ) : (
